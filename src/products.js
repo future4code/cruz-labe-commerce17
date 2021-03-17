@@ -55,7 +55,7 @@ export const products = [
   },
   {
     id: '8',
-    preco: 12000,
+    preco: 13000,
     nome: 'Landsat 8',
     icone: landsat
   },
