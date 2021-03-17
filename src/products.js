@@ -67,7 +67,7 @@ export const products = [
   },
   {
     id: '10',
-    preco: 8000,
+    preco: 11000,
     nome: 'ADEOS 2',
     icone: adeos2
   },
