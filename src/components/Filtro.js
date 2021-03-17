@@ -31,15 +31,15 @@ export class Filtro extends React.Component{
                 <h3>Filtros</h3>
                 <InputContainer>
                 Valor Mínimo
-                <input type='number' value={this.props.mininoValue}  onchange={this.props.onChangeMinimoValue}/>
+                <input type='number' value={this.props.mininoValue}  onChange={this.props.onChangeMinimoValue}/>
                 </InputContainer>
                 <InputContainer>
                 Valor Máximo
-                <input type='number' value={this.props.maximoValue} onchange={this.props.onChangeMaximoValue}/>
+                <input type='number' value={this.props.maximoValue} onChange={this.props.onChangeMaximoValue}/>
                 </InputContainer>
                 <InputContainer>
                 Busque por nome
-                <input type='text' value={this.props.produtoValue}  onchange={this.props.onChangeProdutoValue}/>
+                <input type='text' value={this.props.produtoValue}  onChange={this.props.onChangeProdutoValue}/>
                 </InputContainer>
                 <Botao onclick={this.buscarProdutos} >Buscar</Botao>
             </FilterContainer>
