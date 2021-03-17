@@ -17,12 +17,15 @@ const ContainerPrincipal = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   min-height: 100vh;
-  column-gap: 5px;
-  row-gap: 5px;
+  row-gap: 20px;
+  column-gap: 20px;
   text-align: center;
+  margin:10px;
 `
 const ImgSatelites = styled.img`
   width: 100%;
+  height: 50%;
+  border-radius: 10px 10px 0 0;
 `
 const Header = styled.header`
     display: flex;
@@ -44,24 +47,21 @@ const Footer = styled.footer`
     font-size: 20px;
 `
 const CardsProdutos = styled.div`
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
     box-shadow: 2px 2px 5px darkgrey;
     border-radius: 10px;
     background-color: lightgray;
-    margin: 10px 20px;
-    color: rgb(95, 19, 39);
 `
 const CardsTitulos = styled.h2`
   font-size: medium;
 `
 const Button = styled.button`
   border-radius: 15px;
-  width: 60%;
+  width: 50%;
+  padding: 5px;
 `
 
 export default class App extends React.Component {
+  
   render() {
     return (
       <div>
@@ -70,84 +70,84 @@ export default class App extends React.Component {
          </Header>
          <ContainerPrincipal>
             <CardsProdutos>
-                <ImgSatelites src={quikscat} alt="Galáxia" />
+                <ImgSatelites src={quikscat} alt="Satélite QuikSCAT" />
                 <CardsTitulos>QuikSCAT</CardsTitulos>
                 <p>R$1,00</p>
                 <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <ImgSatelites src={aqua} alt="Galáxia" />
+                <ImgSatelites src={aqua} alt="Satélite AQUA" />
                 <CardsTitulos>AQUA</CardsTitulos>
                 <p>R$1,00</p>
                 <Button>Adicionar ao carrinho</Button>
            </CardsProdutos>
 
             <CardsProdutos>
-                <ImgSatelites src={elektrol} alt="Galáxia" />
+                <ImgSatelites src={elektrol} alt="Satélite Elektro-L" />
                 <CardsTitulos>Elektro-L1</CardsTitulos>
                 <p>R$1,00</p>
                 <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <ImgSatelites src={envisat} alt="Galáxia" />
+                <ImgSatelites src={envisat} alt="Satélite ENVISAT" />
                 <CardsTitulos>ENVISAT</CardsTitulos>
                 <p>R$1,00</p>
                 <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <ImgSatelites src={hy2a} alt="Galáxia" />
+                <ImgSatelites src={hy2a} alt="Satélite HY-2A" />
                 <CardsTitulos>HY-2A</CardsTitulos>
                 <p>R$1,00</p>
                 <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <ImgSatelites src={ikonos} alt="Galáxia" />
+                <ImgSatelites src={ikonos} alt="Satélite IKONOS" />
                 <CardsTitulos>IKONOS</CardsTitulos>
                 <p>R$1,00</p>
                 <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <ImgSatelites src={iras} alt="Galáxia" />
+                <ImgSatelites src={iras} alt="Satélite IRAS" />
                 <CardsTitulos>IRAS</CardsTitulos>
                 <p>R$1,00</p>
                 <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <ImgSatelites src={landsat} alt="Galáxia" />
+                <ImgSatelites src={landsat} alt="Satélite Landsat" />
                 <CardsTitulos>Landsat 8</CardsTitulos>
                 <p>R$1,00</p>
                 <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <ImgSatelites src={nimbus} alt="Galáxia" />
+                <ImgSatelites src={nimbus} alt="Satélite Nimbus" />
                 <CardsTitulos>Nimbus</CardsTitulos>
                 <p>R$1,00</p>
                 <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <ImgSatelites src={adeos2} alt="Galáxia" />
+                <ImgSatelites src={adeos2} alt="Satélite ADEOS2" />
                 <CardsTitulos>ADEOS 2</CardsTitulos>
                 <p>R$1,00</p>
                 <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <ImgSatelites src={sentinel6} alt="Galáxia" />
+                <ImgSatelites src={sentinel6} alt="Satélite Sentinela6" />
                 <CardsTitulos>Sentinel6</CardsTitulos>
                 <p>R$1,00</p>
                 <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <ImgSatelites src={smos} alt="Galáxia" />
+                <ImgSatelites src={smos} alt="Satélite SMOS" />
                 <CardsTitulos>SMOS</CardsTitulos>
                 <p>R$1,00</p>
                 <Button>Adicionar ao carrinho</Button>
