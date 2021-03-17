@@ -1,26 +1,51 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Filtro} from './components/Filtro';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+  state = {
+    mininoValue: '0',
+    maximoValue: '0',
+    produtoValue: 'Produto',
+    produtosDisponiveis: [
+      {
+        id: 1,
+        name: "",
+        value: 10000.0,
+        imageUrl: "https://picsum.photos/200/200",
+      }
+    ]
+ };
+
+onChangeMinimoValue = (event) => {
+    this.setState({mininoValue: event.target.value})
+}
+onChangeMaximoValue = (event) => {
+    this.setState({maximoValue: event.target.value})
+}
+onChangeProdutoValue = (event) => {
+    this.setState({produtoValue: event.target.value})
 }
 
-export default App;
+buscarProdutos = () => {
+    const filtrarProdutos = {
+        valorMinimo: this.state.mininoValue,
+        valorMaximo: this.state.maximoValue,
+        produtoEscolhido: this.setState.produtoValue
+    }
+    const filtroBuscaArray = [filtrarProdutos, ...this.state.produtosDisponiveis]
+    this.setState({produtosDisponiveis: filtroBuscaArray})
+  } 
+
+  render() {
+    return(
+      <Filtro
+        mininoValue={this.state.mininoValue}
+        maximoValue={this.state.maximoValue}
+        produtoValue={this.state.produtoValue}
+        onChangeMinimoValue={this.onChangeMinimoValue}            
+        onChangeMaximoValue={this.onChangeMaximoValue}            
+        onChangeProdutoValue={this.onChangeProdutoValue} 
+      />
+    )
+  }
+}
