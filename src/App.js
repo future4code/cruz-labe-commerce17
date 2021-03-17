@@ -21,11 +21,9 @@ const ContainerPrincipal = styled.div`
   row-gap: 5px;
   text-align: center;
 `
-
 const ImgSatelites = styled.img`
-  width: 80%;
+  width: 100%;
 `
-
 const Header = styled.header`
     display: flex;
     align-items: center;
@@ -58,6 +56,10 @@ const CardsProdutos = styled.div`
 const CardsTitulos = styled.h2`
   font-size: medium;
 `
+const Button = styled.button`
+  border-radius: 15px;
+  width: 60%;
+`
 
 export default class App extends React.Component {
   render() {
@@ -67,64 +69,88 @@ export default class App extends React.Component {
                 <h1>Labe-Commerce</h1>
          </Header>
          <ContainerPrincipal>
-          <CardsProdutos>
-              <CardsTitulos>QuikSCAT</CardsTitulos>
-              <ImgSatelites src={quikscat} alt="Galáxia" />
+            <CardsProdutos>
+                <ImgSatelites src={quikscat} alt="Galáxia" />
+                <CardsTitulos>QuikSCAT</CardsTitulos>
+                <p>R$1,00</p>
+                <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-              <CardsTitulos>AQUA</CardsTitulos>
-              <ImgSatelites src={aqua} alt="Galáxia" />
-            </CardsProdutos>
+                <ImgSatelites src={aqua} alt="Galáxia" />
+                <CardsTitulos>AQUA</CardsTitulos>
+                <p>R$1,00</p>
+                <Button>Adicionar ao carrinho</Button>
+           </CardsProdutos>
 
             <CardsProdutos>
-                <CardsTitulos>Elektro-L1</CardsTitulos>
                 <ImgSatelites src={elektrol} alt="Galáxia" />
+                <CardsTitulos>Elektro-L1</CardsTitulos>
+                <p>R$1,00</p>
+                <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <CardsTitulos>ENVISAT</CardsTitulos>
                 <ImgSatelites src={envisat} alt="Galáxia" />
+                <CardsTitulos>ENVISAT</CardsTitulos>
+                <p>R$1,00</p>
+                <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <CardsTitulos>HY-2A</CardsTitulos>
                 <ImgSatelites src={hy2a} alt="Galáxia" />
+                <CardsTitulos>HY-2A</CardsTitulos>
+                <p>R$1,00</p>
+                <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <CardsTitulos>IKONOS</CardsTitulos>
                 <ImgSatelites src={ikonos} alt="Galáxia" />
+                <CardsTitulos>IKONOS</CardsTitulos>
+                <p>R$1,00</p>
+                <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <CardsTitulos>IRAS</CardsTitulos>
                 <ImgSatelites src={iras} alt="Galáxia" />
+                <CardsTitulos>IRAS</CardsTitulos>
+                <p>R$1,00</p>
+                <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <CardsTitulos>Landsat 8</CardsTitulos>
                 <ImgSatelites src={landsat} alt="Galáxia" />
+                <CardsTitulos>Landsat 8</CardsTitulos>
+                <p>R$1,00</p>
+                <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <CardsTitulos>Nimbus</CardsTitulos>
                 <ImgSatelites src={nimbus} alt="Galáxia" />
+                <CardsTitulos>Nimbus</CardsTitulos>
+                <p>R$1,00</p>
+                <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <CardsTitulos>ADEOS 2</CardsTitulos>
                 <ImgSatelites src={adeos2} alt="Galáxia" />
+                <CardsTitulos>ADEOS 2</CardsTitulos>
+                <p>R$1,00</p>
+                <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <CardsTitulos>Sentinel6</CardsTitulos>
                 <ImgSatelites src={sentinel6} alt="Galáxia" />
+                <CardsTitulos>Sentinel6</CardsTitulos>
+                <p>R$1,00</p>
+                <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
 
             <CardsProdutos>
-                <CardsTitulos>SMOS</CardsTitulos>
                 <ImgSatelites src={smos} alt="Galáxia" />
+                <CardsTitulos>SMOS</CardsTitulos>
+                <p>R$1,00</p>
+                <Button>Adicionar ao carrinho</Button>
             </CardsProdutos>
           </ContainerPrincipal>
           <Footer>
