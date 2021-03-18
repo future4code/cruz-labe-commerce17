@@ -202,6 +202,7 @@ export default class App extends React.Component {
           <ContainerPrincipal>
           {/* {this.listaProdutos()} */} 
           {this.listaFiltro()} 
+
           </ContainerPrincipal>
           <div>
             <h2>carrinho</h2>
@@ -222,7 +223,10 @@ export default class App extends React.Component {
         <Footer>
           <p> &#10049; Labe-Commerce feito com &#10084; para você</p>
         </Footer>
+
       </div> 
     )
   } 
 }
+
+

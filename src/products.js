@@ -80,12 +80,12 @@ export const products = [
   },
   {
 
-    id: '12',
 
+    id: '12',
     preco: 18000,
     nome: 'SMOS',
     icone: smos
   }
-
 ];
+
 
