@@ -72,13 +72,7 @@ export default class App extends React.Component {
     (cartItem) => cartItem.product.id === product.id
   );
 
-  if (produtoNoCarrinho <= -1) {
-    novoCarrinho.push({ product: product, quantidade: 1 });
-  } else {
-    novoCarrinho[produtoNoCarrinho].quantidade += 1;
-  }
-
-  // produtoNoCarrinho <= -1 ? novoCarrinho.push({ product: product, quantidade: 1 }) : novoCarrinho[produtoNoCarrinho].quantidade += 1;
+  produtoNoCarrinho <= -1 ? novoCarrinho.push({ product: product, quantidade: 1 }) : novoCarrinho[produtoNoCarrinho].quantidade += 1;
 
   this.setState({
     cartItems: novoCarrinho
