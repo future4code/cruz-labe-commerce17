@@ -11,7 +11,7 @@ const ContainerPrincipal = styled.div`
   row-gap: 20px;
   column-gap: 20px;
   text-align: center;
-  margin: 10px; //kd tu, macho? Deu certoooo
+  margin: 10px;
 `
 const ImgSatelites = styled.img`
   width: 100%;
@@ -59,60 +59,53 @@ const Button = styled.button`
 `
 export default class App extends React.Component {
   state = {
+    minimoValue: '10000',
+    maximoValue: '1000000',
+    produtoValue: '',
     cartItems: []
- };
+  };
 
  adicionarItemCarrinho = (product) => {
-  const novoCarrinho = [...this.state.cartItems];
+    const novoCarrinho = [...this.state.cartItems];
 
-  const produtoNoCarrinho = this.state.cartItems.findIndex(
-    (cartItem) => cartItem.product.id === product.id
-  );
+    const produtoNoCarrinho = this.state.cartItems.findIndex(
+      (cartItem) => cartItem.product.id === product.id
+    );
 
-  if (produtoNoCarrinho <= -1) {
-    novoCarrinho.push({ product: product, quantidade: 1 });
-  } else {
-    novoCarrinho[produtoNoCarrinho].quantidade += 1;
+    if (produtoNoCarrinho <= -1) {
+      novoCarrinho.push({ product: product, quantidade: 1 });
+    } else {
+      novoCarrinho[produtoNoCarrinho].quantidade += 1;
+    }
+
+    this.setState({
+      cartItems: novoCarrinho
+    });
+  };
+
+  removerItemCarrinho = (product) => {
+    const novoCarrinho = [...this.state.cartItems];
+
+    const removerProduto = this.state.cartItems.findIndex(
+      (cartItem) => cartItem.product.id === product.id
+    )
+
+    novoCarrinho.splice(removerProduto, 1)
+
+    this.setState({
+      cartItems: novoCarrinho
+    });
   }
 
-  this.setState({
-    cartItems: novoCarrinho
-  });
-};
-
-removerItemCarrinho = (product) => {
-  const novoCarrinho = [...this.state.cartItems];
-
-  const removerProduto = this.state.cartItems.findIndex(
-    (cartItem) => cartItem.product.id === product.id
-  )
-
-  novoCarrinho.splice(removerProduto, 1)
-
-  this.setState({
-    cartItems: novoCarrinho
-  });
-}
-
-onChangeMinimoValue = (event) => {
-    this.setState({minimoValue: event.target.value})
-};
-onChangeMaximoValue = (event) => {
-    this.setState({maximoValue: event.target.value})
-};
-onChangeProdutoValue = (event) => {
-    this.setState({produtoValue: event.target.value})
-};
-
-buscarProdutos = () => {
-    const filtrarProdutos = {
-        valorMinimo: this.state.minimoValue,
-        valorMaximo: this.state.maximoValue,
-        produtoEscolhido: this.setState.produtoValue
-    }
-    /* const filtroBuscaArray = [filtrarProdutos, ...this.state.produtosDisponiveis]
-    this.setState({produtosDisponiveis: filtroBuscaArray}) */ 
-}
+  onChangeMinimoValue = (event) => {
+      this.setState({minimoValue: event.target.value})
+  };
+  onChangeMaximoValue = (event) => {
+      this.setState({maximoValue: event.target.value})
+  };
+  onChangeProdutoValue = (event) => {
+      this.setState({produtoValue: event.target.value})
+  };
 
   render() {
     return(
@@ -161,6 +154,7 @@ buscarProdutos = () => {
         <Footer>
           <p> &#10049; Labe-Commerce feito com &#10084; para você</p>
         </Footer>
-      </div>
+      </div> 
     )
-}};
+  } 
+}
