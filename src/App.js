@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import cart from './img/cart.png';
-import Filtro from './components/Filtro';
+import {Filtro} from './components/Filtro';
 import {products} from './products';
 import OrganizaSelect from './components/Select';
 

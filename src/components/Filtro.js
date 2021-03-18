@@ -21,7 +21,7 @@ const Botao = styled.button`
     text-decoration: none;
 `
 
-export default class Filtro extends React.Component{
+export class Filtro extends React.Component {
     
     render () {
         return (
