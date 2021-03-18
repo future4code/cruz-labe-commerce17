@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import cart from './img/cart.png';
-import {Filtro} from './components/Filtro';
+import Filtro from './components/Filtro';
 import {products} from './products';
+import OrganizaSelect from './components/Select';
 
 const ContainerPrincipal = styled.div`
   display: grid;
@@ -57,19 +58,11 @@ const Button = styled.button`
   border-radius: 15px;
   width: 60%;
 `
-const Ordenacao = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-const Select = styled.select`
-  height: fit-content;
-  margin-left: 5px;
-`
 
 export default class App extends React.Component {
   state = {
-    cartItems: []
+    cartItems: [],
+    ordenacao: ""
  };
 
  adicionarItemCarrinho = (product) => {
@@ -84,6 +77,8 @@ export default class App extends React.Component {
   } else {
     novoCarrinho[produtoNoCarrinho].quantidade += 1;
   }
+
+  // produtoNoCarrinho <= -1 ? novoCarrinho.push({ product: product, quantidade: 1 }) : novoCarrinho[produtoNoCarrinho].quantidade += 1;
 
   this.setState({
     cartItems: novoCarrinho
@@ -124,6 +119,42 @@ buscarProdutos = () => {
     this.setState({produtosDisponiveis: filtroBuscaArray}) 
 }
 
+listaProdutos = () => {
+  return this.ordenaProdutos().map((product) => {
+    return (
+      <CardsProdutos key={product.id}>
+        <ImgSatelites src={product.icone} />
+        <CardsTitulos>{product.nome}</CardsTitulos>
+        <p>R${product.preco}</p>
+        <Button onClick={() => this.adicionarItemCarrinho(product)}>Adicionar ao carrinho</Button>
+      </CardsProdutos>
+    );
+  });
+};
+
+ordenaProdutos = () => {
+  let produtosOrdenados = [...products]
+  switch (this.state.ordenacao) {
+    case 'crescente':
+      produtosOrdenados.sort((a, b) => a.preco - b.preco)
+      return produtosOrdenados;
+    case 'decrescente':
+      produtosOrdenados.sort((a, b) => b.preco - a.preco)
+      return produtosOrdenados;
+    default:
+      return produtosOrdenados;
+  };
+};
+
+onChangeSelect = (event) => {
+  this.setState({ordenacao: event.target.value})
+};
+
+organizaOrdem = () => {
+  const novaLista = [...products];
+  console.log("Teste do select", novaLista);
+};
+
   render() {
     return(
       <div>
@@ -140,24 +171,12 @@ buscarProdutos = () => {
           onChangeProdutoValue={this.onChangeProdutoValue} 
         />
         <div>
-          <Ordenacao>
-            <p>Ordenação</p>
-            <Select>
-              <option>Crescente</option>
-              <option>Decrescente</option>
-            </Select>
-          </Ordenacao>
+          <OrganizaSelect
+            onChangeSelect = {this.onChangeSelect}
+
+          />
           <ContainerPrincipal>            
-            {products.map((product) => {
-              return (
-                <CardsProdutos key={product.id}>
-                  <ImgSatelites src={product.icone} />
-                  <CardsTitulos>{product.nome}</CardsTitulos>
-                  <p>R${product.preco}</p>
-                  <Button onClick={() => this.adicionarItemCarrinho(product)}>Adicionar ao carrinho</Button>
-                </CardsProdutos>
-              )
-            })}
+            {this.listaProdutos()}
           </ContainerPrincipal>
           <div>
             <h2>carrinho</h2>

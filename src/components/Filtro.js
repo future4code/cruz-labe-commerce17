@@ -7,8 +7,7 @@ const FilterContainer = styled.div `
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
-    
+    justify-content: space-evenly;   
 `
 const InputContainer = styled.label `
     font-weight: bold;
@@ -20,10 +19,9 @@ const Botao = styled.button`
     font-weight: bold;
     padding: 4px 15px;
     text-decoration: none;
-    
 `
 
-export class Filtro extends React.Component{
+export default class Filtro extends React.Component{
     
     render () {
         return (
@@ -43,6 +41,6 @@ export class Filtro extends React.Component{
                 </InputContainer>
                 <Botao onclick={this.buscarProdutos} >Buscar</Botao>
             </FilterContainer>
-        )
-    }
-}
+        );
+    };
+};
