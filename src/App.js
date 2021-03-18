@@ -120,7 +120,7 @@ buscarProdutos = () => {
         valorMaximo: this.state.maximoValue,
         produtoEscolhido: this.setState.produtoValue
     }
-    const filtroBuscaArray = [filtrarProdutos, ...this.state.produtos]
+    const filtroBuscaArray = [filtrarProdutos, ...this.state.produtosDisponiveis]
     this.setState({produtosDisponiveis: filtroBuscaArray}) 
 }
 
