@@ -11,7 +11,7 @@ const ContainerPrincipal = styled.div`
   row-gap: 20px;
   column-gap: 20px;
   text-align: center;
-  margin: 10px; //kd tu, macho? Deu certoooo
+  margin: 10px;
 `
 const ImgSatelites = styled.img`
   width: 100%;
@@ -57,6 +57,16 @@ const Button = styled.button`
   border-radius: 15px;
   width: 60%;
 `
+const Ordenacao = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const Select = styled.select`
+  height: fit-content;
+  margin-left: 5px;
+`
+
 export default class App extends React.Component {
   state = {
     cartItems: []
@@ -130,7 +140,14 @@ buscarProdutos = () => {
           onChangeProdutoValue={this.onChangeProdutoValue} 
         />
         <div>
-          <ContainerPrincipal>
+          <Ordenacao>
+            <p>Ordenação</p>
+            <Select>
+              <option>Crescente</option>
+              <option>Decrescente</option>
+            </Select>
+          </Ordenacao>
+          <ContainerPrincipal>            
             {products.map((product) => {
               return (
                 <CardsProdutos key={product.id}>
