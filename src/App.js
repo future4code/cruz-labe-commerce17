@@ -58,102 +58,126 @@ const Button = styled.button`
   border-radius: 15px;
   width: 60%;
 `
-
 export default class App extends React.Component {
   state = {
+    minimoValue: '5000',
+    maximoValue: '1000000',
+    produtoValue: '',
     cartItems: [],
     ordenacao: ""
- };
+  };
 
  adicionarItemCarrinho = (product) => {
-  const novoCarrinho = [...this.state.cartItems];
+    const novoCarrinho = [...this.state.cartItems];
 
-  const produtoNoCarrinho = this.state.cartItems.findIndex(
-    (cartItem) => cartItem.product.id === product.id
-  );
+    const produtoNoCarrinho = this.state.cartItems.findIndex(
+      (cartItem) => cartItem.product.id === product.id
+    );
 
-  if (produtoNoCarrinho <= -1) {
-    novoCarrinho.push({ product: product, quantidade: 1 });
-  } else {
-    novoCarrinho[produtoNoCarrinho].quantidade += 1;
+    produtoNoCarrinho <= -1 ? novoCarrinho.push({ product: product, quantidade: 1 }) : novoCarrinho[produtoNoCarrinho].quantidade += 1;
+
+    this.setState({
+      cartItems: novoCarrinho
+    });
+  };
+
+  removerItemCarrinho = (product) => {
+    const novoCarrinho = [...this.state.cartItems];
+
+    const removerProduto = this.state.cartItems.findIndex(
+      (cartItem) => cartItem.product.id === product.id
+    )
+
+    novoCarrinho.splice(removerProduto, 1)
+
+    this.setState({
+      cartItems: novoCarrinho
+    });
   }
 
-  // produtoNoCarrinho <= -1 ? novoCarrinho.push({ product: product, quantidade: 1 }) : novoCarrinho[produtoNoCarrinho].quantidade += 1;
-
-  this.setState({
-    cartItems: novoCarrinho
-  });
-};
-
-removerItemCarrinho = (product) => {
-  const novoCarrinho = [...this.state.cartItems];
-
-  const removerProduto = this.state.cartItems.findIndex(
-    (cartItem) => cartItem.product.id === product.id
-  )
-
-  novoCarrinho.splice(removerProduto, 1)
-
-  this.setState({
-    cartItems: novoCarrinho
-  });
-}
-
-onChangeMinimoValue = (event) => {
-    this.setState({minimoValue: event.target.value})
-};
-onChangeMaximoValue = (event) => {
-    this.setState({maximoValue: event.target.value})
-};
-onChangeProdutoValue = (event) => {
-    this.setState({produtoValue: event.target.value})
-};
-
-buscarProdutos = () => {
-    const filtrarProdutos = {
-        valorMinimo: this.state.minimoValue,
-        valorMaximo: this.state.maximoValue,
-        produtoEscolhido: this.setState.produtoValue
-    }
-    const filtroBuscaArray = [filtrarProdutos, ...this.state.produtosDisponiveis]
-    this.setState({produtosDisponiveis: filtroBuscaArray}) 
-}
-
-listaProdutos = () => {
-  return this.ordenaProdutos().map((product) => {
-    return (
-      <CardsProdutos key={product.id}>
-        <ImgSatelites src={product.icone} />
-        <CardsTitulos>{product.nome}</CardsTitulos>
-        <p>R${product.preco}</p>
-        <Button onClick={() => this.adicionarItemCarrinho(product)}>Adicionar ao carrinho</Button>
-      </CardsProdutos>
-    );
-  });
-};
-
-ordenaProdutos = () => {
-  let produtosOrdenados = [...products]
-  switch (this.state.ordenacao) {
-    case 'crescente':
-      produtosOrdenados.sort((a, b) => a.preco - b.preco)
-      return produtosOrdenados;
-    case 'decrescente':
-      produtosOrdenados.sort((a, b) => b.preco - a.preco)
-      return produtosOrdenados;
-    default:
-      return produtosOrdenados;
+  onChangeMinimoValue = (event) => {
+      this.setState({minimoValue: event.target.value})
   };
-};
+  onChangeMaximoValue = (event) => {
+      this.setState({maximoValue: event.target.value})
+  };
+  onChangeProdutoValue = (event) => {
+      this.setState({produtoValue: event.target.value})
+  };
 
-onChangeSelect = (event) => {
-  this.setState({ordenacao: event.target.value})
-};
+  listaFiltro = () => {
+    return this.filtraProdutos().map((product) => {
+      return (
+        <CardsProdutos key={product.id}>
+          <ImgSatelites src={product.icone} />
+          <CardsTitulos>{product.nome}</CardsTitulos>
+          <p>R${product.preco}</p>
+          <Button onClick={() => this.adicionarItemCarrinho(product)}>Adicionar ao carrinho</Button>
+        </CardsProdutos>
+      );
+    });
+  };
 
-organizaOrdem = () => {
-  const novaLista = [...products];
-  console.log("Teste do select", novaLista);
-};
+  filtraProdutos = () => {
+    let produtosFiltrados= [...products]
+    produtosFiltrados= produtosFiltrados.filter((produto) => {
+      if (produto.preco <= this.state.minimoValue)  {
+        return false 
+      }
+      return true
+    })
+    produtosFiltrados= produtosFiltrados.filter((produto) => {
+      if (produto.preco >= this.state.maximoValue)  {
+        return false 
+      }
+      return true
+    })
+    produtosFiltrados= produtosFiltrados.filter((produto) => {
+      if (produto.nome = this.state.produtoValue)  {
+        return false 
+      }
+      return true
+    })
+
+    return produtosFiltrados
+  }
+
+  listaProdutos = () => {
+    return this.ordenaProdutos().map((product) => {
+      return (
+        <CardsProdutos key={product.id}>
+          <ImgSatelites src={product.icone} />
+          <CardsTitulos>{product.nome}</CardsTitulos>
+          <p>R${product.preco}</p>
+          <Button onClick={() => this.adicionarItemCarrinho(product)}>Adicionar ao carrinho</Button>
+        </CardsProdutos>
+      );
+    });
+  };
+  
+  ordenaProdutos = () => {
+    let produtosOrdenados = [...products]
+    switch (this.state.ordenacao) {
+      case 'crescente':
+        produtosOrdenados.sort((a, b) => a.preco - b.preco)
+        return produtosOrdenados;
+      case 'decrescente':
+        produtosOrdenados.sort((a, b) => b.preco - a.preco)
+        return produtosOrdenados;
+      default:
+        return produtosOrdenados;
+    };
+  };
+  
+  onChangeSelect = (event) => {
+    this.setState({ordenacao: event.target.value})
+  };
+  
+  organizaOrdem = () => {
+    const novaLista = [...products];
+    console.log("Teste do select", novaLista);
+  };
+  
 
   render() {
     return(
@@ -173,10 +197,12 @@ organizaOrdem = () => {
         <div>
           <OrganizaSelect
             onChangeSelect = {this.onChangeSelect}
-
           />
-          <ContainerPrincipal>            
-            {this.listaProdutos()}
+
+          <ContainerPrincipal>
+          {/* {this.listaProdutos()} */} 
+          {this.listaFiltro()} 
+
           </ContainerPrincipal>
           <div>
             <h2>carrinho</h2>
@@ -197,6 +223,10 @@ organizaOrdem = () => {
         <Footer>
           <p> &#10049; Labe-Commerce feito com &#10084; para você</p>
         </Footer>
-      </div>
+
+      </div> 
     )
-}};
+  } 
+}
+
+
