@@ -10,6 +10,7 @@ import nimbus from './img/nimbus.jpg';
 import quikscat from './img/quikscat.jpg';
 import sentinel6 from './img/sentinel6.png';
 import smos from './img/smos.jpg';
+
 export const products = [
   {
     id: '1',
@@ -55,7 +56,7 @@ export const products = [
   },
   {
     id: '8',
-    preco: 13000,
+    preco: 12000,
     nome: 'Landsat 8',
     icone: landsat
   },
@@ -67,7 +68,7 @@ export const products = [
   },
   {
     id: '10',
-    preco: 11000,
+    preco: 8000,
     nome: 'ADEOS 2',
     icone: adeos2
   },
@@ -78,7 +79,7 @@ export const products = [
     icone: sentinel6
   },
   {
-    id: '2',
+    id: '12',
     preco: 18000,
     nome: 'SMOS',
     icone: smos
