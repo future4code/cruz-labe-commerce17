@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import cart from './img/cart.png';
 import {Filtro} from './components/Filtro';
 import {products} from './products';
+import OrganizaSelect from './components/Select';
 
 const ContainerPrincipal = styled.div`
   display: grid;
@@ -59,10 +60,11 @@ const Button = styled.button`
 `
 export default class App extends React.Component {
   state = {
-    minimoValue: '10000',
+    minimoValue: '5000',
     maximoValue: '1000000',
     produtoValue: '',
-    cartItems: []
+    cartItems: [],
+    ordenacao: ""
   };
 
  adicionarItemCarrinho = (product) => {
@@ -72,11 +74,7 @@ export default class App extends React.Component {
       (cartItem) => cartItem.product.id === product.id
     );
 
-    if (produtoNoCarrinho <= -1) {
-      novoCarrinho.push({ product: product, quantidade: 1 });
-    } else {
-      novoCarrinho[produtoNoCarrinho].quantidade += 1;
-    }
+    produtoNoCarrinho <= -1 ? novoCarrinho.push({ product: product, quantidade: 1 }) : novoCarrinho[produtoNoCarrinho].quantidade += 1;
 
     this.setState({
       cartItems: novoCarrinho
@@ -107,6 +105,80 @@ export default class App extends React.Component {
       this.setState({produtoValue: event.target.value})
   };
 
+  listaFiltro = () => {
+    return this.filtraProdutos().map((product) => {
+      return (
+        <CardsProdutos key={product.id}>
+          <ImgSatelites src={product.icone} />
+          <CardsTitulos>{product.nome}</CardsTitulos>
+          <p>R${product.preco}</p>
+          <Button onClick={() => this.adicionarItemCarrinho(product)}>Adicionar ao carrinho</Button>
+        </CardsProdutos>
+      );
+    });
+  };
+
+  filtraProdutos = () => {
+    let produtosFiltrados= [...products]
+    produtosFiltrados= produtosFiltrados.filter((produto) => {
+      if (produto.preco <= this.state.minimoValue)  {
+        return false 
+      }
+      return true
+    })
+    produtosFiltrados= produtosFiltrados.filter((produto) => {
+      if (produto.preco >= this.state.maximoValue)  {
+        return false 
+      }
+      return true
+    })
+    produtosFiltrados= produtosFiltrados.filter((produto) => {
+      if (produto.nome = this.state.produtoValue)  {
+        return false 
+      }
+      return true
+    })
+
+    return produtosFiltrados
+  }
+
+  listaProdutos = () => {
+    return this.ordenaProdutos().map((product) => {
+      return (
+        <CardsProdutos key={product.id}>
+          <ImgSatelites src={product.icone} />
+          <CardsTitulos>{product.nome}</CardsTitulos>
+          <p>R${product.preco}</p>
+          <Button onClick={() => this.adicionarItemCarrinho(product)}>Adicionar ao carrinho</Button>
+        </CardsProdutos>
+      );
+    });
+  };
+  
+  ordenaProdutos = () => {
+    let produtosOrdenados = [...products]
+    switch (this.state.ordenacao) {
+      case 'crescente':
+        produtosOrdenados.sort((a, b) => a.preco - b.preco)
+        return produtosOrdenados;
+      case 'decrescente':
+        produtosOrdenados.sort((a, b) => b.preco - a.preco)
+        return produtosOrdenados;
+      default:
+        return produtosOrdenados;
+    };
+  };
+  
+  onChangeSelect = (event) => {
+    this.setState({ordenacao: event.target.value})
+  };
+  
+  organizaOrdem = () => {
+    const novaLista = [...products];
+    console.log("Teste do select", novaLista);
+  };
+  
+
   render() {
     return(
       <div>
@@ -123,17 +195,13 @@ export default class App extends React.Component {
           onChangeProdutoValue={this.onChangeProdutoValue} 
         />
         <div>
+          <OrganizaSelect
+            onChangeSelect = {this.onChangeSelect}
+          />
+
           <ContainerPrincipal>
-            {products.map((product) => {
-              return (
-                <CardsProdutos key={product.id}>
-                  <ImgSatelites src={product.icone} />
-                  <CardsTitulos>{product.nome}</CardsTitulos>
-                  <p>R${product.preco}</p>
-                  <Button onClick={() => this.adicionarItemCarrinho(product)}>Adicionar ao carrinho</Button>
-                </CardsProdutos>
-              )
-            })}
+          {/* {this.listaProdutos()} */} 
+          {this.listaFiltro()} 
           </ContainerPrincipal>
           <div>
             <h2>carrinho</h2>

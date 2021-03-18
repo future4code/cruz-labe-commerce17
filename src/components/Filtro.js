@@ -24,10 +24,12 @@ export class Filtro extends React.Component{
                 Valor Mínimo
                 <input type='number' value={this.props.minimoValue}  onChange={this.props.onChangeMinimoValue}/>
                 </InputContainer>
+
                 <InputContainer>
                 Valor Máximo
                 <input type='number' value={this.props.maximoValue} onChange={this.props.onChangeMaximoValue}/>
                 </InputContainer>
+                
                 <InputContainer>
                 Busque por nome
                 <input type='text' placeholder='Produto' value={this.props.produtoValue}  onChange={this.props.onChangeProdutoValue}/>
