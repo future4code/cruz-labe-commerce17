@@ -70,8 +70,16 @@ export default class App extends React.Component {
     cartItems: [],
     ordenacao: ''
   };
-
-  adicionarItemCarrinho = (product) => {
+  componentDidMount() {
+    const carrinhoEmString = localStorage.getItem('novoCarrinho')
+    const carrinhoEmObjeto = JSON.parse(carrinhoEmString)
+    this.setState({novoCarrinho: carrinhoEmObjeto.cartItems})
+    console.log("Montei")
+  }
+  componentDidUpdate() {
+    console.log("Atualizei")
+  };
+ adicionarItemCarrinho = (product) => {
     const novoCarrinho = [...this.state.cartItems];
     const produtoNoCarrinho = this.state.cartItems.findIndex(
       (cartItem) => cartItem.product.id === product.id
@@ -86,6 +94,9 @@ export default class App extends React.Component {
     this.setState({
       cartItems: novoCarrinho
     });
+    
+    localStorage.setItem('novoCarrinho', JSON.stringify(novoCarrinho))
+
     this.renderTotal();
     console.log(novoCarrinho.lenght)
   };
@@ -244,8 +255,10 @@ export default class App extends React.Component {
           <OrganizaSelect onChangeSelect={this.onChangeSelect} />
 
           <ContainerPrincipal>
-            {/* {this.listaProdutos()} */}
+
+            {this.listaProdutos()}
             {this.listaFiltro()}
+
           </ContainerPrincipal>
           <div>
             <h2>carrinho</h2>
@@ -256,7 +269,7 @@ export default class App extends React.Component {
                     x{product.quantidade} - {product.product.nome}
                     R${product.product.preco * product.quantidade} -{' '}
                     <button onClick={() => this.removerItemCarrinho(product)}>
-                      x
+                    x
                     </button>
                   </li>
                 );
