@@ -7,15 +7,16 @@ const FilterContainer = styled.div `
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
-    
+    justify-content: space-evenly;   
 `
 const InputContainer = styled.label `
     font-weight: bold;
     font-size: 15px;
 `
 
+
 export class Filtro extends React.Component{
+
     render () {
         return (
             <FilterContainer>
@@ -33,8 +34,9 @@ export class Filtro extends React.Component{
                 <InputContainer>
                 Busque por nome
                 <input type='text' placeholder='Produto' value={this.props.produtoValue}  onChange={this.props.onChangeProdutoValue}/>
+
                 </InputContainer>
             </FilterContainer>
-        )
-    }
-}
+        );
+    };
+};
