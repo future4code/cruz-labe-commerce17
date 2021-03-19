@@ -4,6 +4,7 @@ import cart from './img/cart.png';
 import { Filtro } from './components/Filtro';
 import { products } from './products';
 import OrganizaSelect from './components/Select';
+import Popup from './components/Popup';
 
 const ContainerPrincipal = styled.div`
   display: grid;
@@ -21,6 +22,7 @@ const ImgSatelites = styled.img`
 `;
 const Cart = styled.img`
   height: 50px;
+  cursor: pointer;
 `;
 const Header = styled.header`
   display: flex;
@@ -57,7 +59,9 @@ const CardsTitulos = styled.h2`
 const Button = styled.button`
   border-radius: 15px;
   width: 60%;
+  cursor: pointer;
 `;
+
 export default class App extends React.Component {
   state = {
     minimoValue: '5000',
@@ -83,11 +87,11 @@ export default class App extends React.Component {
       cartItems: novoCarrinho
     });
     this.renderTotal();
+    console.log(novoCarrinho.lenght)
   };
 
   removerItemCarrinho = (product) => {
     const novoCarrinho = [...this.state.cartItems];
-    console.log(product);
     const itemPos = this.state.cartItems.findIndex(
       (cartItem) => cartItem.product.id === product.product.id
     );
@@ -186,7 +190,7 @@ export default class App extends React.Component {
     function getTotal(total, item) {
       return total + item.product.preco * item.quantidade;
     }
-    return total
+    return total;
   };
 
   onChangeSelect = (event) => {
@@ -198,12 +202,35 @@ export default class App extends React.Component {
     console.log('Teste do select', novaLista);
   };
 
+  toggleModal = () => {
+    const buttonPopup= true
+    this.setState({ buttonPopup, setButtonPopup: true });
+  }
+    
+
   render() {
     return (
       <div>
         <Header>
           <h1>Labe-Commerce</h1>
-          <Cart src={cart}></Cart>
+          <Cart src={cart} onClick={this.toggleModal}></Cart>
+          <Popup trigger={this.state.buttonPopup}>
+            <h2>carrinho</h2>
+            <ul>
+              {this.state.cartItems.map((product) => {
+                return (
+                  <li>
+                    x{product.quantidade} - {product.product.nome}
+                    R${product.product.preco * product.quantidade} -{' '}
+                    <button onClick={() => this.removerItemCarrinho(product)}>
+                      x
+                    </button>
+                  </li>
+                );
+              })}
+              <h2>Total: {this.renderTotal()}</h2>
+            </ul>
+          </Popup>
         </Header>
         <Filtro
           minimoValue={this.state.minimoValue}
