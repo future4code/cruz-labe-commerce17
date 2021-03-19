@@ -3,14 +3,13 @@ import styled from 'styled-components';
 import cart from './img/cart.png';
 import {Filtro} from './components/Filtro';
 import {products} from './products';
-import OrganizaSelect from './components/Select';
 
 const ContainerPrincipal = styled.div`
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   min-height: 100vh;
-  row-gap: 20px;
-  column-gap: 20px;
+  row-gap: 10px;
   text-align: center;
   margin: 10px;
 `
@@ -50,7 +49,10 @@ const CardsProdutos = styled.div`
   background-color: lightgray;
   margin: 10px 20px;
   color: rgb(95, 19, 39);
+  width: 20vw;
+  height: 50vh;
 `
+
 const CardsTitulos = styled.h2`
   font-size: medium;
 `
@@ -64,39 +66,15 @@ export default class App extends React.Component {
     maximoValue: '1000000',
     produtoValue: '',
     cartItems: [],
-    ordenacao: "",
-    productsState: [],
-    produtosPrintados: []
+    ordenacao: ""
   };
 
-  // onChanges
-  onChangeMinimoValue = (event) => {
-      this.setState({minimoValue: event.target.value})
-      this.filtraProdutos();
-  };
-  onChangeMaximoValue = (event) => {
-      this.setState({maximoValue: event.target.value})
-      this.filtraProdutos();
-  };
-  onChangeProdutoValue = (event) => {
-      this.setState({produtoValue: event.target.value})
-      this.filtraProdutos();
-  };
-  onChangeSelect = (event) => {
-    this.setState({ ordenacao: event.target.value })
-    this.ordenaProdutos();
-  };
-
-  // functions
   adicionarItemCarrinho = (product) => {
     const novoCarrinho = [...this.state.cartItems];
-
     const produtoNoCarrinho = this.state.cartItems.findIndex(
       (cartItem) => cartItem.product.id === product.id
     );
-
     produtoNoCarrinho <= -1 ? novoCarrinho.push({ product: product, quantidade: 1 }) : novoCarrinho[produtoNoCarrinho].quantidade += 1;
-
     this.setState({
       cartItems: novoCarrinho
     });
@@ -104,23 +82,25 @@ export default class App extends React.Component {
 
   removerItemCarrinho = (product) => {
     const novoCarrinho = [...this.state.cartItems];
-
     const removerProduto = this.state.cartItems.findIndex(
       (cartItem) => cartItem.product.id === product.id
     )
-
     novoCarrinho.splice(removerProduto, 1)
-
     this.setState({
       cartItems: novoCarrinho
     });
   }
-
-
-  filtrarProdutos = () => {
-    console.log("filtrarProdutos");
-    return this.filtraProdutos()
-    .map((product) => {
+  onChangeMinimoValue = (event) => {
+      this.setState({minimoValue: event.target.value})
+  };
+  onChangeMaximoValue = (event) => {
+      this.setState({maximoValue: event.target.value})
+  };
+  onChangeProdutoValue = (event) => {
+      this.setState({produtoValue: event.target.value})
+  };
+  listaFiltro = () => {
+    return this.filtraProdutos().map((product) => {
       return (
         <CardsProdutos key={product.id}>
           <ImgSatelites src={product.icone} />
@@ -131,91 +111,38 @@ export default class App extends React.Component {
       );
     });
   };
-
   filtraProdutos = () => {
-    console.log("filtraProdutos");
-    let produtosFiltrados = this.state.productsState;
-    produtosFiltrados= produtosFiltrados.filter((produto) => {
-      if (produto.preco <= this.state.minimoValue)  {
-        return false 
-      }
-      return true
-    })
-    produtosFiltrados= produtosFiltrados.filter((produto) => {
-      if (produto.preco >= this.state.maximoValue)  {
-        return false 
-      }
-      return true
-    })
+    let produtosFiltrados= [...products];
+
     produtosFiltrados = produtosFiltrados.filter((produto) => {
-      if (produto.produtoValue === this.state.produtoValue)  {
-        return false 
+      if ((produto.preco <= this.state.minimoValue) || 
+          (produto.preco >= this.state.maximoValue)) {
+        return false
       }
-      return true
+        return true
     })
-    this.state.produtosPrintados = produtosFiltrados;
 
-    console.log("produtosPrintados", this.state.produtosPrintados);
+    produtosFiltrados= produtosFiltrados.filter((produto) => {
+      if (produto.nome === this.state.produtoValue) {
+        return false
+      }
+        return true
+    })
 
-    console.log("filtraProdutos", produtosFiltrados);
-
-    return produtosFiltrados
-  }
-
-  ordenarProdutos = () => {
-    console.log("ordenarProdutos");
-    return this.ordenaProdutos()
-    .map((product) => {
-      return (
-        <CardsProdutos key={product.id}>
-          <ImgSatelites src={product.icone} />
-          <CardsTitulos>{product.nome}</CardsTitulos>
-          <p>R${product.preco}</p>
-          <Button onClick={() => this.adicionarItemCarrinho(product)}>Adicionar ao carrinho</Button>
-        </CardsProdutos>
-      );
-    });
-  };
-  
-  ordenaProdutos = () => {
-    console.log("ordenaProdutos")
-    let produtosOrdenados = [...products];
     switch (this.state.ordenacao) {
       case 'crescente':
-        produtosOrdenados.sort((a, b) => a.preco - b.preco)
-        break;
+        produtosFiltrados.sort((a, b) => a.preco - b.preco)
+        return produtosFiltrados;
       case 'decrescente':
-        produtosOrdenados.sort((a, b) => b.preco - a.preco)
-        break;
+        produtosFiltrados.sort((a, b) => b.preco - a.preco)
+        return produtosFiltrados;
       default:
-        break;
     };
-    this.state.productsState = produtosOrdenados;
-    return produtosOrdenados;
+    return produtosFiltrados
+  }
+  onChangeSelect = (event) => {
+    this.setState({ordenacao: event.target.value})
   };
-
-  listarProdutos = () => {
-    let aux = this.state.productsState;
-    if (aux.length === 0) {
-      aux = products
-      console.log('products:', products);
-    }
-    else {
-      aux = this.state.produtosPrintados
-      console.log('else produtosPrintados:', this.state.produtosPrintados);
-    }
-    return aux.map((product) => {
-      return (
-        <CardsProdutos key={product.id}>
-          <ImgSatelites src={product.icone} />
-          <CardsTitulos>{product.nome}</CardsTitulos>
-          <p>R${product.preco}</p>
-          <Button onClick={() => this.adicionarItemCarrinho(product)}>Adicionar ao carrinho</Button>
-        </CardsProdutos>
-      );
-    });
-  };
-
   render() {
     return(
       <div>
@@ -227,32 +154,16 @@ export default class App extends React.Component {
           minimoValue={this.state.minimoValue}
           maximoValue={this.state.maximoValue}
           produtoValue={this.state.produtoValue}
-          onChangeMinimoValue={this.onChangeMinimoValue}            
-          onChangeMaximoValue={this.onChangeMaximoValue}            
-          onChangeProdutoValue={this.onChangeProdutoValue} 
+          onChangeMinimoValue={this.onChangeMinimoValue}           
+          onChangeMaximoValue={this.onChangeMaximoValue}           
+          onChangeProdutoValue={this.onChangeProdutoValue}
+          onChangeSelect = {this.onChangeSelect}
         />
         <div>
-          <OrganizaSelect
-            onChangeSelect = {this.onChangeSelect}
-          /> 
           <ContainerPrincipal>
-            {this.filtrarProdutos()}
-            {this.ordenarProdutos()} 
-
-           {/* {this.state.produtosPrintados.map((product) => {
-                return (
-                  <CardsProdutos key={product.id}>
-                    <ImgSatelites src={product.icone} />
-                    <CardsTitulos>{product.nome}</CardsTitulos>
-                    <p>R${product.preco}</p>
-                    <Button onClick={() => this.adicionarItemCarrinho(product)}>Adicionar ao carrinho</Button>
-                  </CardsProdutos>
-                );
-            })
-           } */}
-              
-          </ContainerPrincipal>          
-        <div>
+          {this.listaFiltro()}
+          </ContainerPrincipal>
+          <div>
             <h2>carrinho</h2>
             <ul>
               {this.state.cartItems.map((product) => {
@@ -266,14 +177,26 @@ export default class App extends React.Component {
                 );
               })}
             </ul>
+          </div>
         </div>
-      </div>
         <Footer>
           <p> &#10049; Labe-Commerce feito com &#10084; para você</p>
         </Footer>
       </div>
     )
-  } 
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
