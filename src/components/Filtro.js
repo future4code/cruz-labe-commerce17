@@ -7,6 +7,8 @@ const FilterContainer = styled.div `
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;  
+    background-color: aliceblue ;
+    border: 1px solid cadetblue;
 `
 const InputContainer = styled.label `
     font-weight: bold;
@@ -17,9 +19,13 @@ const Select = styled.select`
   margin-left: 5px;
 `
 const Entrada = styled.input`
-    border-radius: 6px;
+    border-radius: 10px;
     margin-left: 5px;
+    padding-left: 5px;
+    width: 100px;
+    border-color: aqua;
 `
+
 export class Filtro extends React.Component{
     render () {
         return (

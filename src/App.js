@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import cart from './img/cart.png';
 import {Filtro} from './components/Filtro';
 import {products} from './products';
-import OrganizaSelect from './components/Select';
 
 const ContainerPrincipal = styled.div`
   display: grid;
@@ -67,6 +66,17 @@ export default class App extends React.Component {
     ordenacao: ""
   };
 
+  componentDidMount(){
+    const carrinhoString = localStorage.getItem('novoCarrinho')
+    const carrinhoObjeto = JSON.parse(carrinhoString)
+    this.setState({novoCarrinho: carrinhoObjeto})
+    console.log('Montei')
+  }
+
+  componentDidUpdate(){
+    console.log('Atualizei')
+  }
+
  adicionarItemCarrinho = (product) => {
     const novoCarrinho = [...this.state.cartItems];
 
@@ -79,6 +89,8 @@ export default class App extends React.Component {
     this.setState({
       cartItems: novoCarrinho
     });
+
+    localStorage.setItem('novoCarrinho', JSON.stringify(novoCarrinho))
   };
 
   removerItemCarrinho = (product) => {
