@@ -69,7 +69,6 @@ export default class App extends React.Component {
 
   adicionarItemCarrinho = (product) => {
     const novoCarrinho = [...this.state.cartItems];
-
     const produtoNoCarrinho = this.state.cartItems.findIndex(
       (cartItem) => cartItem.product.id === product.id
     );
@@ -83,6 +82,7 @@ export default class App extends React.Component {
     this.setState({
       cartItems: novoCarrinho
     });
+    this.renderTotal();
   };
 
   removerItemCarrinho = (product) => {
@@ -181,6 +181,14 @@ export default class App extends React.Component {
     }
   };
 
+  renderTotal = () => {
+    let total = this.state.cartItems.reduce(getTotal, 0);
+    function getTotal(total, item) {
+      return total + item.product.preco * item.quantidade;
+    }
+    return total
+  };
+
   onChangeSelect = (event) => {
     this.setState({ ordenacao: event.target.value });
   };
@@ -218,13 +226,15 @@ export default class App extends React.Component {
               {this.state.cartItems.map((product) => {
                 return (
                   <li>
-                    x{product.quantidade} - {product.product.nome} -{' '}
+                    x{product.quantidade} - {product.product.nome}
+                    R${product.product.preco * product.quantidade} -{' '}
                     <button onClick={() => this.removerItemCarrinho(product)}>
                       x
                     </button>
                   </li>
                 );
               })}
+              <h2>Total: {this.renderTotal()}</h2>
             </ul>
           </div>
         </div>
