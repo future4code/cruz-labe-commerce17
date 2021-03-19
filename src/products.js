@@ -79,8 +79,6 @@ export const products = [
     icone: sentinel6
   },
   {
-
-
     id: '12',
     preco: 18000,
     nome: 'SMOS',
@@ -89,3 +87,7 @@ export const products = [
 ];
 
 
+// A função Listar só deve listar produtos
+// Quando o usuário filtrar -> Chamar a função Filtrar e preencher a LISTA
+// Quando o usuário ordenar -> Chamar a função Ordenar e preencher a LISTA
+// A função Listar só deve listar produtos

@@ -65,10 +65,30 @@ export default class App extends React.Component {
     produtoValue: '',
     cartItems: [],
     ordenacao: "",
-    productsState: []
+    productsState: [],
+    produtosPrintados: []
   };
 
- adicionarItemCarrinho = (product) => {
+  // onChanges
+  onChangeMinimoValue = (event) => {
+      this.setState({minimoValue: event.target.value})
+      this.filtraProdutos();
+  };
+  onChangeMaximoValue = (event) => {
+      this.setState({maximoValue: event.target.value})
+      this.filtraProdutos();
+  };
+  onChangeProdutoValue = (event) => {
+      this.setState({produtoValue: event.target.value})
+      this.filtraProdutos();
+  };
+  onChangeSelect = (event) => {
+    this.setState({ ordenacao: event.target.value })
+    this.ordenaProdutos();
+  };
+
+  // functions
+  adicionarItemCarrinho = (product) => {
     const novoCarrinho = [...this.state.cartItems];
 
     const produtoNoCarrinho = this.state.cartItems.findIndex(
@@ -96,18 +116,11 @@ export default class App extends React.Component {
     });
   }
 
-  onChangeMinimoValue = (event) => {
-      this.setState({minimoValue: event.target.value})
-  };
-  onChangeMaximoValue = (event) => {
-      this.setState({maximoValue: event.target.value})
-  };
-  onChangeProdutoValue = (event) => {
-      this.setState({produtoValue: event.target.value})
-  };
 
-  listaFiltro = () => {
-    return this.filtraProdutos().map((product) => {
+  filtrarProdutos = () => {
+    console.log("filtrarProdutos");
+    return this.filtraProdutos()
+    .map((product) => {
       return (
         <CardsProdutos key={product.id}>
           <ImgSatelites src={product.icone} />
@@ -120,8 +133,8 @@ export default class App extends React.Component {
   };
 
   filtraProdutos = () => {
-    //console.log("State", this.state.productsState);
-    let produtosFiltrados = this.state.productsState;//[...this.state.productsState]
+    console.log("filtraProdutos");
+    let produtosFiltrados = this.state.productsState;
     produtosFiltrados= produtosFiltrados.filter((produto) => {
       if (produto.preco <= this.state.minimoValue)  {
         return false 
@@ -140,13 +153,19 @@ export default class App extends React.Component {
       }
       return true
     })
+    this.state.produtosPrintados = produtosFiltrados;
+
+    console.log("produtosPrintados", this.state.produtosPrintados);
+
     console.log("filtraProdutos", produtosFiltrados);
 
     return produtosFiltrados
   }
 
-  listaProdutos = () => {
-    return this.ordenaProdutos().map((product) => {
+  ordenarProdutos = () => {
+    console.log("ordenarProdutos");
+    return this.ordenaProdutos()
+    .map((product) => {
       return (
         <CardsProdutos key={product.id}>
           <ImgSatelites src={product.icone} />
@@ -159,9 +178,8 @@ export default class App extends React.Component {
   };
   
   ordenaProdutos = () => {
+    console.log("ordenaProdutos")
     let produtosOrdenados = [...products];
-    this.state.productsState = produtosOrdenados;
-        
     switch (this.state.ordenacao) {
       case 'crescente':
         produtosOrdenados.sort((a, b) => a.preco - b.preco)
@@ -172,21 +190,31 @@ export default class App extends React.Component {
       default:
         break;
     };
-    
+    this.state.productsState = produtosOrdenados;
     return produtosOrdenados;
   };
-  
-  onChangeSelect = (event) => {
-    this.setState({ordenacao: event.target.value})
-  };
-  
-  organizaOrdem = () => {
-    const novaLista = [...products];
-    console.log("Teste do select", novaLista);
-  };
-  
 
-
+  listarProdutos = () => {
+    let aux = this.state.productsState;
+    if (aux.length === 0) {
+      aux = products
+      console.log('products:', products);
+    }
+    else {
+      aux = this.state.produtosPrintados
+      console.log('else produtosPrintados:', this.state.produtosPrintados);
+    }
+    return aux.map((product) => {
+      return (
+        <CardsProdutos key={product.id}>
+          <ImgSatelites src={product.icone} />
+          <CardsTitulos>{product.nome}</CardsTitulos>
+          <p>R${product.preco}</p>
+          <Button onClick={() => this.adicionarItemCarrinho(product)}>Adicionar ao carrinho</Button>
+        </CardsProdutos>
+      );
+    });
+  };
 
   render() {
     return(
@@ -208,10 +236,23 @@ export default class App extends React.Component {
             onChangeSelect = {this.onChangeSelect}
           /> 
           <ContainerPrincipal>
-            {this.listaFiltro()}
-            {this.listaProdutos()}
-          </ContainerPrincipal>
-          <div>
+            {this.filtrarProdutos()}
+            {this.ordenarProdutos()} 
+
+           {/* {this.state.produtosPrintados.map((product) => {
+                return (
+                  <CardsProdutos key={product.id}>
+                    <ImgSatelites src={product.icone} />
+                    <CardsTitulos>{product.nome}</CardsTitulos>
+                    <p>R${product.preco}</p>
+                    <Button onClick={() => this.adicionarItemCarrinho(product)}>Adicionar ao carrinho</Button>
+                  </CardsProdutos>
+                );
+            })
+           } */}
+              
+          </ContainerPrincipal>          
+        <div>
             <h2>carrinho</h2>
             <ul>
               {this.state.cartItems.map((product) => {
@@ -225,13 +266,12 @@ export default class App extends React.Component {
                 );
               })}
             </ul>
-          </div>
         </div>
+      </div>
         <Footer>
           <p> &#10049; Labe-Commerce feito com &#10084; para você</p>
         </Footer>
-
-      </div> 
+      </div>
     )
   } 
 }
