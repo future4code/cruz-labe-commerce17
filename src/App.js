@@ -15,24 +15,28 @@ const ContainerPrincipal = styled.div`
   text-align: center;
   margin: 10px;
 `;
+
 const ImgSatelites = styled.img`
   width: 100%;
   height: 50%;
   border-radius: 10px 10px 0 0;
 `;
+
 const Cart = styled.img`
   height: 50px;
   cursor: pointer;
 `;
+
 const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-around;
   height: 100px;
   background-color: rgb(143, 183, 206);
-  border-radius: 0 0 0 30px;
+  border-radius: 0 30px 0 30px;
   color: black;
 `;
+
 const Footer = styled.footer`
   display: flex;
   justify-content: center;
@@ -43,6 +47,7 @@ const Footer = styled.footer`
   color: rgb(14, 39, 68);
   font-size: 20px;
 `;
+
 const CardsProdutos = styled.div`
   justify-content: center;
   align-items: center;
@@ -53,9 +58,11 @@ const CardsProdutos = styled.div`
   margin: 10px 20px;
   color: rgb(95, 19, 39);
 `;
+
 const CardsTitulos = styled.h2`
   font-size: medium;
 `;
+
 const Button = styled.button`
   border-radius: 15px;
   width: 60%;
@@ -70,15 +77,18 @@ export default class App extends React.Component {
     cartItems: [],
     ordenacao: ''
   };
+
   componentDidMount() {
     const carrinhoEmString = localStorage.getItem('novoCarrinho')
     const carrinhoEmObjeto = JSON.parse(carrinhoEmString)
     this.setState({novoCarrinho: carrinhoEmObjeto.cartItems})
     console.log("Montei")
   }
+
   componentDidUpdate() {
     console.log("Atualizei")
   };
+
  adicionarItemCarrinho = (product) => {
     const novoCarrinho = [...this.state.cartItems];
     const produtoNoCarrinho = this.state.cartItems.findIndex(
@@ -99,6 +109,7 @@ export default class App extends React.Component {
 
     this.renderTotal();
     console.log(novoCarrinho.lenght)
+
   };
 
   removerItemCarrinho = (product) => {
@@ -155,46 +166,28 @@ export default class App extends React.Component {
       if (produto.preco >= this.state.maximoValue) {
         return false;
       }
-      return true;
-    });
-    produtosFiltrados = produtosFiltrados.filter((produto) => {
-      if ((produto.nome = this.state.produtoValue)) {
-        return false;
+      
+      return true
+    })
+    produtosFiltrados= produtosFiltrados.filter((produto) => {
+      if (produto.nome === this.state.produtoValue)  {
+        return false 
       }
-      return true;
-    });
-
-    return produtosFiltrados;
-  };
-
-  listaProdutos = () => {
-    return this.ordenaProdutos().map((product) => {
-      return (
-        <CardsProdutos key={product.id}>
-          <ImgSatelites src={product.icone} />
-          <CardsTitulos>{product.nome}</CardsTitulos>
-          <p>R${product.preco}</p>
-          <Button onClick={() => this.adicionarItemCarrinho(product)}>
-            Adicionar ao carrinho
-          </Button>
-        </CardsProdutos>
-      );
-    });
-  };
-
-  ordenaProdutos = () => {
-    let produtosOrdenados = [...products];
+      return true
+    })
     switch (this.state.ordenacao) {
       case 'crescente':
-        produtosOrdenados.sort((a, b) => a.preco - b.preco);
-        return produtosOrdenados;
+        produtosFiltrados.sort((a, b) => a.preco - b.preco)
+        return produtosFiltrados;
       case 'decrescente':
-        produtosOrdenados.sort((a, b) => b.preco - a.preco);
-        return produtosOrdenados;
+        produtosFiltrados.sort((a, b) => b.preco - a.preco)
+        return produtosFiltrados;
       default:
-        return produtosOrdenados;
-    }
-  };
+        
+    };
+
+    return produtosFiltrados
+  }
 
   renderTotal = () => {
     let total = this.state.cartItems.reduce(getTotal, 0);
@@ -208,16 +201,10 @@ export default class App extends React.Component {
     this.setState({ ordenacao: event.target.value });
   };
 
-  organizaOrdem = () => {
-    const novaLista = [...products];
-    console.log('Teste do select', novaLista);
-  };
-
   toggleModal = () => {
     const buttonPopup= true
     this.setState({ buttonPopup, setButtonPopup: true });
   }
-    
 
   render() {
     return (
@@ -247,18 +234,14 @@ export default class App extends React.Component {
           minimoValue={this.state.minimoValue}
           maximoValue={this.state.maximoValue}
           produtoValue={this.state.produtoValue}
-          onChangeMinimoValue={this.onChangeMinimoValue}
-          onChangeMaximoValue={this.onChangeMaximoValue}
-          onChangeProdutoValue={this.onChangeProdutoValue}
+          onChangeMinimoValue={this.onChangeMinimoValue}            
+          onChangeMaximoValue={this.onChangeMaximoValue}            
+          onChangeProdutoValue={this.onChangeProdutoValue} 
+          onChangeSelect = {this.onChangeSelect}
         />
         <div>
-          <OrganizaSelect onChangeSelect={this.onChangeSelect} />
-
           <ContainerPrincipal>
-
-            {this.listaProdutos()}
-            {this.listaFiltro()}
-
+          {this.listaFiltro()} 
           </ContainerPrincipal>
           <div>
             <h2>carrinho</h2>
@@ -281,7 +264,8 @@ export default class App extends React.Component {
         <Footer>
           <p> &#10049; Labe-Commerce feito com &#10084; para você</p>
         </Footer>
-      </div>
-    );
-  }
+      </div> 
+    )
+  } 
 }
+
