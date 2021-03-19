@@ -27,7 +27,7 @@ const Header = styled.header`
   justify-content: space-around;
   height: 100px;
   background-color: rgb(143, 183, 206);
-  border-radius: 0 0 0 30px;
+  border-radius: 0 30px 0 30px;
   color: black;
 `
 const Footer = styled.footer`
