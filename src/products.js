@@ -79,13 +79,10 @@ export const products = [
     icone: sentinel6
   },
   {
-
-
     id: '12',
     preco: 18000,
     nome: 'SMOS',
     icone: smos
   }
 ];
-
 

@@ -7,11 +7,11 @@ import OrganizaSelect from './components/Select';
 import Popup from './components/Popup';
 
 const ContainerPrincipal = styled.div`
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   min-height: 100vh;
-  row-gap: 20px;
-  column-gap: 20px;
+  row-gap: 10px;
   text-align: center;
   margin: 10px;
 `;
@@ -57,6 +57,8 @@ const CardsProdutos = styled.div`
   background-color: lightgray;
   margin: 10px 20px;
   color: rgb(95, 19, 39);
+  width: 20vw;
+  height: 50vh;
 `;
 
 const CardsTitulos = styled.h2`
@@ -89,7 +91,7 @@ export default class App extends React.Component {
     console.log("Atualizei")
   };
 
- adicionarItemCarrinho = (product) => {
+  adicionarItemCarrinho = (product) => {
     const novoCarrinho = [...this.state.cartItems];
     const produtoNoCarrinho = this.state.cartItems.findIndex(
       (cartItem) => cartItem.product.id === product.id
@@ -138,7 +140,6 @@ export default class App extends React.Component {
   onChangeProdutoValue = (event) => {
     this.setState({ produtoValue: event.target.value });
   };
-
   listaFiltro = () => {
     return this.filtraProdutos().map((product) => {
       return (
@@ -153,7 +154,6 @@ export default class App extends React.Component {
       );
     });
   };
-
   filtraProdutos = () => {
     let produtosFiltrados = [...products];
     produtosFiltrados = produtosFiltrados.filter((produto) => {
@@ -169,12 +169,14 @@ export default class App extends React.Component {
       
       return true
     })
+
     produtosFiltrados= produtosFiltrados.filter((produto) => {
       if (produto.nome === this.state.produtoValue)  {
         return false 
       }
-      return true
+        return true
     })
+
     switch (this.state.ordenacao) {
       case 'crescente':
         produtosFiltrados.sort((a, b) => a.preco - b.preco)
@@ -182,8 +184,7 @@ export default class App extends React.Component {
       case 'decrescente':
         produtosFiltrados.sort((a, b) => b.preco - a.preco)
         return produtosFiltrados;
-      default:
-        
+      default:       
     };
 
     return produtosFiltrados
@@ -266,6 +267,5 @@ export default class App extends React.Component {
         </Footer>
       </div> 
     )
-  } 
+  }
 }
-
