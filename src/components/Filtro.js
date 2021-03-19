@@ -14,13 +14,12 @@ const InputContainer = styled.label `
     font-size: 15px;
 `
 
-
 export class Filtro extends React.Component{
 
     render () {
         return (
             <FilterContainer>
-                <h3>Filtros</h3>
+               {/*  <h3>Filtros</h3> */}
                 <InputContainer>
                 Valor Mínimo
                 <input type='number' value={this.props.minimoValue}  onChange={this.props.onChangeMinimoValue}/>
@@ -28,13 +27,12 @@ export class Filtro extends React.Component{
 
                 <InputContainer>
                 Valor Máximo
-                <input type='number' value={this.props.maximoValue} onChange={this.props.onChangeMaximoValue}/>
+                <input type='number' placeholder="R$" value={this.props.maximoValue} onChange={this.props.onChangeMaximoValue}/>
                 </InputContainer>
                 
                 <InputContainer>
                 Busque por nome
                 <input type='text' placeholder='Produto' value={this.props.produtoValue}  onChange={this.props.onChangeProdutoValue}/>
-
                 </InputContainer>
             </FilterContainer>
         );
