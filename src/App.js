@@ -73,11 +73,9 @@ export default class App extends React.Component {
     this.setState({novoCarrinho: carrinhoEmObjeto.cartItems})
     console.log("Montei")
   }
-
   componentDidUpdate() {
     console.log("Atualizei")
   };
-
  adicionarItemCarrinho = (product) => {
     const novoCarrinho = [...this.state.cartItems];
 
@@ -93,8 +91,6 @@ export default class App extends React.Component {
     
     localStorage.setItem('novoCarrinho', JSON.stringify(novoCarrinho))
   };
-
-
   removerItemCarrinho = (product) => {
     const novoCarrinho = [...this.state.cartItems];
 
@@ -214,8 +210,8 @@ export default class App extends React.Component {
           />
 
           <ContainerPrincipal>
-          {/* {this.listaProdutos()} */} 
-          {this.listaFiltro()} 
+            {this.listaProdutos()}
+            {this.listaFiltro()}
           </ContainerPrincipal>
           <div>
             <h2>carrinho</h2>
@@ -225,7 +221,7 @@ export default class App extends React.Component {
                   <li>
                     x{product.quantidade} - {product.product.nome} -{' '}
                     <button onClick={() => this.removerItemCarrinho(product)}>
-                      x
+                    x
                     </button>
                   </li>
                 );
