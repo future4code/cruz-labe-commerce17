@@ -66,6 +66,17 @@ export default class App extends React.Component {
     cartItems: [],
     ordenacao: ""
   };
+  
+  componentDidMount() {
+    const carrinhoEmString = localStorage.getItem('novoCarrinho')
+    const carrinhoEmObjeto = JSON.parse(carrinhoEmString)
+    this.setState({novoCarrinho: carrinhoEmObjeto.cartItems})
+    console.log("Montei")
+  }
+
+  componentDidUpdate() {
+    console.log("Atualizei")
+  };
 
  adicionarItemCarrinho = (product) => {
     const novoCarrinho = [...this.state.cartItems];
@@ -79,7 +90,10 @@ export default class App extends React.Component {
     this.setState({
       cartItems: novoCarrinho
     });
+    
+    localStorage.setItem('novoCarrinho', JSON.stringify(novoCarrinho))
   };
+
 
   removerItemCarrinho = (product) => {
     const novoCarrinho = [...this.state.cartItems];
