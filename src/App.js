@@ -64,7 +64,8 @@ export default class App extends React.Component {
     maximoValue: '1000000',
     produtoValue: '',
     cartItems: [],
-    ordenacao: ""
+    ordenacao: "",
+    productsState: []
   };
 
  adicionarItemCarrinho = (product) => {
@@ -119,7 +120,8 @@ export default class App extends React.Component {
   };
 
   filtraProdutos = () => {
-    let produtosFiltrados= [...products]
+    //console.log("State", this.state.productsState);
+    let produtosFiltrados = this.state.productsState;//[...this.state.productsState]
     produtosFiltrados= produtosFiltrados.filter((produto) => {
       if (produto.preco <= this.state.minimoValue)  {
         return false 
@@ -132,12 +134,13 @@ export default class App extends React.Component {
       }
       return true
     })
-    produtosFiltrados= produtosFiltrados.filter((produto) => {
-      if (produto.nome = this.state.produtoValue)  {
+    produtosFiltrados = produtosFiltrados.filter((produto) => {
+      if (produto.produtoValue === this.state.produtoValue)  {
         return false 
       }
       return true
     })
+    console.log("filtraProdutos", produtosFiltrados);
 
     return produtosFiltrados
   }
@@ -156,17 +159,21 @@ export default class App extends React.Component {
   };
   
   ordenaProdutos = () => {
-    let produtosOrdenados = [...products]
+    let produtosOrdenados = [...products];
+    this.state.productsState = produtosOrdenados;
+        
     switch (this.state.ordenacao) {
       case 'crescente':
         produtosOrdenados.sort((a, b) => a.preco - b.preco)
-        return produtosOrdenados;
+        break;
       case 'decrescente':
         produtosOrdenados.sort((a, b) => b.preco - a.preco)
-        return produtosOrdenados;
+        break;
       default:
-        return produtosOrdenados;
+        break;
     };
+    
+    return produtosOrdenados;
   };
   
   onChangeSelect = (event) => {
@@ -178,6 +185,8 @@ export default class App extends React.Component {
     console.log("Teste do select", novaLista);
   };
   
+
+
 
   render() {
     return(
@@ -197,12 +206,10 @@ export default class App extends React.Component {
         <div>
           <OrganizaSelect
             onChangeSelect = {this.onChangeSelect}
-          />
-
+          /> 
           <ContainerPrincipal>
-          {/* {this.listaProdutos()} */} 
-          {this.listaFiltro()} 
-
+            {this.listaFiltro()}
+            {this.listaProdutos()}
           </ContainerPrincipal>
           <div>
             <h2>carrinho</h2>
