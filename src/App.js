@@ -4,11 +4,12 @@ import cart from './img/cart.png';
 import { Filtro } from './components/Filtro';
 import { products } from './products';
 import Popup from './components/Popup';
+import "./styles/animacao.css"
 
 const ContainerPrincipal = styled.div`
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   min-height: 100vh;
   row-gap: 10px;
   text-align: center;
@@ -30,7 +31,7 @@ const ContainerPrincipal = styled.div`
 
 const ImgSatelites = styled.img`
   width: 100%;
-  height: 45%;
+  height: 50%;
   border-radius: 10px 10px 0 0;
 
   @media only screen and (max-width: 375px) {
@@ -42,6 +43,11 @@ const ImgSatelites = styled.img`
 const Cart = styled.img`
   height: 50px;
   cursor: pointer;
+  background-color: rgba(150, 163, 184, 0.4);
+  color: white;
+  border-radius: 50%;
+  opacity: 1;
+  padding: 10px;
 
   @media only screen and (max-width: 768px) {
     width: 8%;
@@ -54,10 +60,15 @@ const Header = styled.header`
   align-items: center;
   justify-content: space-around;
   height: 100px;
-  background-color: rgb(143, 183, 206);
-  border-radius: 0 30px 0 30px;
-  color: black;
+  font-size: x-large;
+  /* background-color: rgba(150, 163, 184, 0.4); */
+  border-radius: 20px 70px 30px;
+  color: #FFFFFF;
 `;
+
+const TituloHeader = styled.h1`
+    text-shadow: 2px 2px 5px darkgrey;
+`
 
 const Footer = styled.footer`
   display: flex;
@@ -76,11 +87,11 @@ const CardsProdutos = styled.div`
   margin-top: 10px;
   box-shadow: 2px 2px 5px darkgrey;
   border-radius: 10px;
-  background-color: lightgray;
+  background-color: rgba(150, 163, 184, 0.4);
   margin: 10px 20px;
   color: rgb(95, 19, 39);
-  width: 20vw;
-  height: 50vh;
+  width: 15vw;
+  height: 40vh;
 
   @media only screen and (max-width: 375px) {
     margin: 0;
@@ -93,9 +104,25 @@ const CardsProdutos = styled.div`
   }
 `;
 
+const InformacoesCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  color: white;
+  margin: 15px;
+`
+
 const CardsTitulos = styled.h2`
-  font-size: medium;
+  color: #FFFFFF;
+  margin: 0;
+  text-shadow: 2px 2px 5px darkgrey;
+
 `;
+
+const Preco = styled.p`
+  font-size: large;
+`
 
 const Button = styled.button`
   border-radius: 15px;
@@ -178,11 +205,11 @@ export default class App extends React.Component {
       return (
         <CardsProdutos key={product.id}>
           <ImgSatelites src={product.icone} />
-          <CardsTitulos>{product.nome}</CardsTitulos>
-          <p>R${product.preco}</p>
-          <Button onClick={() => this.adicionarItemCarrinho(product)}>
-            Adicionar ao carrinho
-          </Button>
+          <InformacoesCard>
+            <CardsTitulos>{product.nome}</CardsTitulos>
+            <Preco>R${product.preco}</Preco>
+            <Button onClick={() => this.adicionarItemCarrinho(product)}>Adicionar ao carrinho</Button>
+          </InformacoesCard>
         </CardsProdutos>
       );
     });
@@ -199,7 +226,7 @@ export default class App extends React.Component {
 
       });
       produtosFiltrados = produtosFiltrados.filter((produto) => {
-        // SE O PREÇO DO PRODUTO FOR MAIOR QUE O DIGITADO PELO USUÁRIO 
+        // SE O PREÇO DO PRODUTO FOR MAIOR QUE O DIGITADO PELO USUÁRIO
         // E SE O CAMPO DO INPUT FOR "TRUE", OU SEJA, SE HOUVER ALGO DIGITADO
         // NÃO MOSTRA! (FALSE)
         // MAS! SE O CAMPO DO INPUT FOR "FALSE", ENTÃO MOSTRA!
@@ -209,7 +236,7 @@ export default class App extends React.Component {
           return true
       })
 
-    
+
 
     produtosFiltrados = produtosFiltrados.filter((produto) => {
       let produtoMinusculo = produto.nome.toLowerCase()
@@ -226,7 +253,7 @@ export default class App extends React.Component {
         return produtosFiltrados;
       default:
     };
-    
+
     return produtosFiltrados
   }
 
@@ -249,9 +276,9 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div class="animacao">
         <Header>
-          <h1>Oldies from the Sky</h1>
+          <TituloHeader>Oldies from the Sky</TituloHeader>
           <Cart src={cart} onClick={this.toggleModal}></Cart>
           <Popup trigger={this.state.buttonPopup}>
             <h2>carrinho</h2>
@@ -282,8 +309,11 @@ export default class App extends React.Component {
         />
         <div>
           <ContainerPrincipal>
-                
-          {this.mostrarProdutos()}
+
+            {this.mostrarProdutos()}
+            {/* <div class="animacao"> */}
+              <div class="stars"></div>
+            {/* </div> */}
 
           </ContainerPrincipal>
           <div>
