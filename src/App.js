@@ -80,16 +80,16 @@ export default class App extends React.Component {
     ordenacao: ''
   };
 
-  componentDidMount() {
-    const carrinhoEmString = localStorage.getItem('novoCarrinho')
-    const carrinhoEmObjeto = JSON.parse(carrinhoEmString)
-    this.setState({novoCarrinho: carrinhoEmObjeto.cartItems})
-    console.log("Montei")
-  }
+  // componentDidMount() {
+  //   const carrinhoEmString = localStorage.getItem('novoCarrinho')
+  //   const carrinhoEmObjeto = JSON.parse(carrinhoEmString)
+  //   this.setState({novoCarrinho: carrinhoEmObjeto.cartItems})
+  //   console.log("Montei")
+  // }
 
-  componentDidUpdate() {
-    console.log("Atualizei")
-  };
+  // componentDidUpdate() {
+  //   console.log("Atualizei")
+  // };
 
   adicionarItemCarrinho = (product) => {
     const novoCarrinho = [...this.state.cartItems];
@@ -106,12 +106,11 @@ export default class App extends React.Component {
     this.setState({
       cartItems: novoCarrinho
     });
-    
-    localStorage.setItem('novoCarrinho', JSON.stringify(novoCarrinho))
+
+    localStorage.setItem('novoCarrinho', JSON.stringify(novoCarrinho));
 
     this.renderTotal();
-    console.log(novoCarrinho.lenght)
-
+    console.log(novoCarrinho.lenght);
   };
 
   removerItemCarrinho = (product) => {
@@ -166,29 +165,29 @@ export default class App extends React.Component {
       if (produto.preco >= this.state.maximoValue) {
         return false;
       }
-      
-      return true
-    })
 
-    produtosFiltrados= produtosFiltrados.filter((produto) => {
-      if (produto.nome === this.state.produtoValue)  {
-        return false 
+      return true;
+    });
+
+    produtosFiltrados = produtosFiltrados.filter((produto) => {
+      if (produto.nome === this.state.produtoValue) {
+        return false;
       }
-        return true
-    })
+      return true;
+    });
 
     switch (this.state.ordenacao) {
       case 'crescente':
-        produtosFiltrados.sort((a, b) => a.preco - b.preco)
+        produtosFiltrados.sort((a, b) => a.preco - b.preco);
         return produtosFiltrados;
       case 'decrescente':
-        produtosFiltrados.sort((a, b) => b.preco - a.preco)
+        produtosFiltrados.sort((a, b) => b.preco - a.preco);
         return produtosFiltrados;
-      default:       
-    };
+      default:
+    }
 
-    return produtosFiltrados
-  }
+    return produtosFiltrados;
+  };
 
   renderTotal = () => {
     let total = this.state.cartItems.reduce(getTotal, 0);
@@ -203,9 +202,8 @@ export default class App extends React.Component {
   };
 
   toggleModal = () => {
-    const buttonPopup= true
-    this.setState({ buttonPopup, setButtonPopup: true });
-  }
+    this.setState({ ...this.state, buttonPopup: !this.state.buttonPopup });
+  };
 
   render() {
     return (
@@ -214,13 +212,14 @@ export default class App extends React.Component {
           <h1>Labe-Commerce</h1>
           <Cart src={cart} onClick={this.toggleModal}></Cart>
           <Popup trigger={this.state.buttonPopup}>
+            <button onClick={this.toggleModal}>X</button>
             <h2>carrinho</h2>
             <ul>
               {this.state.cartItems.map((product) => {
                 return (
                   <li>
-                    x{product.quantidade} - {product.product.nome}
-                    R${product.product.preco * product.quantidade} -{' '}
+                    x{product.quantidade} - {product.product.nome} R$
+                    {product.product.preco * product.quantidade} -{' '}
                     <button onClick={() => this.removerItemCarrinho(product)}>
                       x
                     </button>
@@ -235,37 +234,18 @@ export default class App extends React.Component {
           minimoValue={this.state.minimoValue}
           maximoValue={this.state.maximoValue}
           produtoValue={this.state.produtoValue}
-          onChangeMinimoValue={this.onChangeMinimoValue}            
-          onChangeMaximoValue={this.onChangeMaximoValue}            
-          onChangeProdutoValue={this.onChangeProdutoValue} 
-          onChangeSelect = {this.onChangeSelect}
+          onChangeMinimoValue={this.onChangeMinimoValue}
+          onChangeMaximoValue={this.onChangeMaximoValue}
+          onChangeProdutoValue={this.onChangeProdutoValue}
+          onChangeSelect={this.onChangeSelect}
         />
         <div>
-          <ContainerPrincipal>
-          {this.listaFiltro()} 
-          </ContainerPrincipal>
-          <div>
-            <h2>carrinho</h2>
-            <ul>
-              {this.state.cartItems.map((product) => {
-                return (
-                  <li>
-                    x{product.quantidade} - {product.product.nome}
-                    R${product.product.preco * product.quantidade} -{' '}
-                    <button onClick={() => this.removerItemCarrinho(product)}>
-                    x
-                    </button>
-                  </li>
-                );
-              })}
-              <h2>Total: {this.renderTotal()}</h2>
-            </ul>
-          </div>
+          <ContainerPrincipal>{this.listaFiltro()}</ContainerPrincipal>
         </div>
         <Footer>
           <p> &#10049; Labe-Commerce feito com &#10084; para você</p>
         </Footer>
-      </div> 
-    )
+      </div>
+    );
   }
 }
