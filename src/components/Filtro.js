@@ -9,10 +9,31 @@ const FilterContainer = styled.div `
     justify-content: space-evenly;  
     background-color: aliceblue ;
     border: 1px solid cadetblue;
+
+    @media only screen and (max-width: 375px) {
+        height: 13vh;
+        flex-direction: column;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 97%;
+    }
+
+    @media only screen and (max-width: 768px) {
+        width: 97%;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 `
 const InputContainer = styled.label `
     font-weight: bold;
     font-size: 15px;
+
+    @media only screen and (max-width: 768px) {
+        font-size: small;
+        text-align: center;
+    }
 `
 const Select = styled.select`
   height: fit-content;
@@ -44,7 +65,7 @@ export class Filtro extends React.Component{
                 <Entrada type='text' placeholder='Produto' value={this.props.produtoValue}  onChange={this.props.onChangeProdutoValue}/>
                 </InputContainer>
                 <InputContainer>
-                    Ordenar por preço
+                    Ordene por preço
                     <Select onChange={this.props.onChangeSelect}>
                     <option value=""></option>
                     <option value="crescente">Crescente</option>

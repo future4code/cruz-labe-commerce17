@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import cart from './img/cart.png';
 import { Filtro } from './components/Filtro';
 import { products } from './products';
-import OrganizaSelect from './components/Select';
 import Popup from './components/Popup';
 
 const ContainerPrincipal = styled.div`
@@ -14,17 +13,40 @@ const ContainerPrincipal = styled.div`
   row-gap: 10px;
   text-align: center;
   margin: 10px;
+
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    margin: 0;
+}
+
+  @media only screen and (max-width: 375px) {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: 1fr;
+    margin: 0;
+}
 `;
 
 const ImgSatelites = styled.img`
   width: 100%;
   height: 50%;
   border-radius: 10px 10px 0 0;
+
+  @media only screen and (max-width: 375px) {
+    width: 100%;
+
+}
 `;
 
 const Cart = styled.img`
   height: 50px;
   cursor: pointer;
+
+  @media only screen and (max-width: 768px) {
+    width: 8%;
+    height: 40%;
+  }  
 `;
 
 const Header = styled.header`
@@ -59,6 +81,15 @@ const CardsProdutos = styled.div`
   color: rgb(95, 19, 39);
   width: 20vw;
   height: 50vh;
+
+  @media only screen and (max-width: 375px) {
+    margin: 0;
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 97%;
+    margin: auto;
+  }
 `;
 
 const CardsTitulos = styled.h2`
@@ -80,12 +111,12 @@ export default class App extends React.Component {
     ordenacao: ''
   };
 
-  componentDidMount() {
-    const carrinhoEmString = localStorage.getItem('novoCarrinho')
-    const carrinhoEmObjeto = JSON.parse(carrinhoEmString)
-    this.setState({novoCarrinho: carrinhoEmObjeto.cartItems})
-    console.log("Montei")
-  }
+  // componentDidMount() {
+  //   const carrinhoEmString = localStorage.getItem('novoCarrinho')
+  //   const carrinhoEmObjeto = JSON.parse(carrinhoEmString)
+  //   this.setState({novoCarrinho: carrinhoEmObjeto.cartItems})
+  //   console.log("Montei")
+  // }
 
   componentDidUpdate() {
     console.log("Atualizei")
@@ -207,11 +238,25 @@ export default class App extends React.Component {
     this.setState({ buttonPopup, setButtonPopup: true });
   }
 
+  // state = {
+  //   minimoValue: '5000',
+  //   maximoValue: '1000000',
+  //   produtoValue: '',
+  //   cartItems: [],
+  //   ordenacao: ''
+  // };
+
+  exibirProdutos = () => {
+    if (!this.filtraProdutos) {
+      return [...products];
+    }
+  }
+
   render() {
     return (
       <div>
         <Header>
-          <h1>Labe-Commerce</h1>
+          <h1>Oldies from the Sky</h1>
           <Cart src={cart} onClick={this.toggleModal}></Cart>
           <Popup trigger={this.state.buttonPopup}>
             <h2>carrinho</h2>
@@ -242,7 +287,8 @@ export default class App extends React.Component {
         />
         <div>
           <ContainerPrincipal>
-          {this.listaFiltro()} 
+          {this.listaFiltro()}
+
           </ContainerPrincipal>
           <div>
             <h2>carrinho</h2>
