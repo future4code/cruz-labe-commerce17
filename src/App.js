@@ -20,17 +20,17 @@ const ContainerPrincipal = styled.div`
     margin: 0;
 }
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 350px) {
     display: flex;
     flex-direction: column;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     margin: 0;
 }
 `;
 
 const ImgSatelites = styled.img`
   width: 100%;
-  height: 50%;
+  height: 45%;
   border-radius: 10px 10px 0 0;
 
   @media only screen and (max-width: 375px) {
@@ -84,6 +84,7 @@ const CardsProdutos = styled.div`
 
   @media only screen and (max-width: 375px) {
     margin: 0;
+    height: 47vh;
   }
 
   @media only screen and (max-width: 768px) {

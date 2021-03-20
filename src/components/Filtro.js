@@ -10,8 +10,9 @@ const FilterContainer = styled.div `
     background-color: aliceblue ;
     border: 1px solid cadetblue;
 
-    @media only screen and (max-width: 375px) {
-        height: 13vh;
+    @media only screen and (min-width: 355px) {
+        height: 15vh;
+        display: flex;
         flex-direction: column;
         margin: auto;
         margin-top: 10px;
