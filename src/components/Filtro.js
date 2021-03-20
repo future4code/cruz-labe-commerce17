@@ -10,7 +10,7 @@ const FilterContainer = styled.div `
     background-color: aliceblue ;
     border: 1px solid cadetblue;
 
-    @media only screen and (min-width: 355px) {
+    @media only screen and (max-width: 355px) {
         height: 15vh;
         display: flex;
         flex-direction: column;
@@ -26,6 +26,7 @@ const FilterContainer = styled.div `
         margin-top: 10px;
         margin-bottom: 10px;
     }
+
 `
 const InputContainer = styled.label `
     font-weight: bold;
@@ -66,11 +67,11 @@ export class Filtro extends React.Component{
                 <Entrada type='text' placeholder='Produto' value={this.props.produtoValue}  onChange={this.props.onChangeProdutoValue}/>
                 </InputContainer>
                 <InputContainer>
-                    Ordene por preço
+                    Ordene
                     <Select onChange={this.props.onChangeSelect}>
-                    <option value=""></option>
-                    <option value="crescente">Crescente</option>
-                    <option value="decrescente">Decrescente</option>
+                    <option value="">Lançamentos</option>
+                    <option value="crescente">Menor preço</option>
+                    <option value="decrescente">Maior preço</option>
                     </Select>
                 </InputContainer>
             </FilterContainer>

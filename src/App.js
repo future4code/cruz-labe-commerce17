@@ -46,7 +46,7 @@ const Cart = styled.img`
   @media only screen and (max-width: 768px) {
     width: 8%;
     height: 40%;
-  }  
+  }
 `;
 
 const Header = styled.header`
@@ -105,11 +105,11 @@ const Button = styled.button`
 
 export default class App extends React.Component {
   state = {
-    minimoValue: '5000',
-    maximoValue: '1000000',
+    minimoValue: '',
+    maximoValue: '',
     produtoValue: '',
     cartItems: [],
-    ordenacao: ''
+    ordenacao: '',
   };
 
   // componentDidMount() {
@@ -119,9 +119,9 @@ export default class App extends React.Component {
   //   console.log("Montei")
   // }
 
-  componentDidUpdate() {
-    console.log("Atualizei")
-  };
+  // componentDidUpdate() {
+  //   console.log("Atualizei")
+  // };
 
   adicionarItemCarrinho = (product) => {
     const novoCarrinho = [...this.state.cartItems];
@@ -138,7 +138,7 @@ export default class App extends React.Component {
     this.setState({
       cartItems: novoCarrinho
     });
-    
+
     localStorage.setItem('novoCarrinho', JSON.stringify(novoCarrinho))
 
     this.renderTotal();
@@ -164,7 +164,7 @@ export default class App extends React.Component {
   };
 
   onChangeMinimoValue = (event) => {
-    this.setState({ minimoValue: event.target.value });
+    this.setState({minimoValue: event.target.value });
   };
   onChangeMaximoValue = (event) => {
     this.setState({ maximoValue: event.target.value });
@@ -172,8 +172,9 @@ export default class App extends React.Component {
   onChangeProdutoValue = (event) => {
     this.setState({ produtoValue: event.target.value });
   };
-  listaFiltro = () => {
-    return this.filtraProdutos().map((product) => {
+
+  mostrarProdutos = () => {
+    return this.filtrarEOrdenarProdutos().map((product) => {
       return (
         <CardsProdutos key={product.id}>
           <ImgSatelites src={product.icone} />
@@ -186,27 +187,34 @@ export default class App extends React.Component {
       );
     });
   };
-  filtraProdutos = () => {
-    let produtosFiltrados = [...products];
-    produtosFiltrados = produtosFiltrados.filter((produto) => {
-      if (produto.preco <= this.state.minimoValue) {
-        return false;
-      }
-      return true;
-    });
-    produtosFiltrados = produtosFiltrados.filter((produto) => {
-      if (produto.preco >= this.state.maximoValue) {
-        return false;
-      }
-      
-      return true
-    })
+  filtrarEOrdenarProdutos = () => {
+    let produtosFiltrados = products;
+      produtosFiltrados = produtosFiltrados.filter((produto) => {
+        // SE O PREÇO DO PRODUTO FOR MENOR DO QUE O DIGITADO PELO USUÁRIO
+        // NÃO MOSTRA! (FALSE)
+        if (produto.preco < this.state.minimoValue) {
+          return false;
+        }
+          return true;
 
-    produtosFiltrados= produtosFiltrados.filter((produto) => {
-      if (produto.nome === this.state.produtoValue)  {
-        return false 
-      }
-        return true
+      });
+      produtosFiltrados = produtosFiltrados.filter((produto) => {
+        // SE O PREÇO DO PRODUTO FOR MAIOR QUE O DIGITADO PELO USUÁRIO 
+        // E SE O CAMPO DO INPUT FOR "TRUE", OU SEJA, SE HOUVER ALGO DIGITADO
+        // NÃO MOSTRA! (FALSE)
+        // MAS! SE O CAMPO DO INPUT FOR "FALSE", ENTÃO MOSTRA!
+        if ((produto.preco > this.state.maximoValue) && (this.state.maximoValue)) {
+          return false;
+        }
+          return true
+      })
+
+    
+
+    produtosFiltrados = produtosFiltrados.filter((produto) => {
+      let produtoMinusculo = produto.nome.toLowerCase()
+      let inputBusca = this.state.produtoValue.toLowerCase()
+      return produtoMinusculo.includes(inputBusca)
     })
 
     switch (this.state.ordenacao) {
@@ -216,9 +224,9 @@ export default class App extends React.Component {
       case 'decrescente':
         produtosFiltrados.sort((a, b) => b.preco - a.preco)
         return produtosFiltrados;
-      default:       
+      default:
     };
-
+    
     return produtosFiltrados
   }
 
@@ -237,20 +245,6 @@ export default class App extends React.Component {
   toggleModal = () => {
     const buttonPopup= true
     this.setState({ buttonPopup, setButtonPopup: true });
-  }
-
-  // state = {
-  //   minimoValue: '5000',
-  //   maximoValue: '1000000',
-  //   produtoValue: '',
-  //   cartItems: [],
-  //   ordenacao: ''
-  // };
-
-  exibirProdutos = () => {
-    if (!this.filtraProdutos) {
-      return [...products];
-    }
   }
 
   render() {
@@ -281,14 +275,15 @@ export default class App extends React.Component {
           minimoValue={this.state.minimoValue}
           maximoValue={this.state.maximoValue}
           produtoValue={this.state.produtoValue}
-          onChangeMinimoValue={this.onChangeMinimoValue}            
-          onChangeMaximoValue={this.onChangeMaximoValue}            
-          onChangeProdutoValue={this.onChangeProdutoValue} 
+          onChangeMinimoValue={this.onChangeMinimoValue}
+          onChangeMaximoValue={this.onChangeMaximoValue}
+          onChangeProdutoValue={this.onChangeProdutoValue}
           onChangeSelect = {this.onChangeSelect}
         />
         <div>
           <ContainerPrincipal>
-          {this.listaFiltro()}
+                
+          {this.mostrarProdutos()}
 
           </ContainerPrincipal>
           <div>
@@ -312,7 +307,7 @@ export default class App extends React.Component {
         <Footer>
           <p> &#10049; Labe-Commerce feito com &#10084; para você</p>
         </Footer>
-      </div> 
+      </div>
     )
   }
 }

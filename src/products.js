@@ -20,7 +20,7 @@ export const products = [
   },
   {
     id: '2',
-    preco: 22000,
+    preco: 20000,
     nome: 'AQUA',
     icone: aqua
   },
