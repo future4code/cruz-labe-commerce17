@@ -11,7 +11,11 @@ Para colecionar ou presentear, acesse a nossa loja virtual e encontre satélites
 Visite a nossa loja em: https://labecommerce.surge.sh/
 
 ### Nossa loja
+
+- Desktop
 ![sky1000](https://user-images.githubusercontent.com/63327969/111925040-f293fb80-8a85-11eb-91e7-09dd2b433c3a.png)
+
+- Mobile
 ![sky999](https://user-images.githubusercontent.com/63327969/111925044-f58eec00-8a85-11eb-901f-0134619d0ffc.png)
 
 
