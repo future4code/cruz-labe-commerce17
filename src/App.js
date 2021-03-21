@@ -108,7 +108,7 @@ const CardsProdutos = styled.div`
   margin: 10px 27px;
   color: rgb(95, 19, 39);
   width: 15vw;
-  height: 50vh;
+  height: 60vh;
 
   @media only screen and (max-width: 375px) {
     margin: 0;
@@ -148,7 +148,7 @@ const Button = styled.button`
   border: none;
   background-color: #F55F20;
   color: #FFFFFF;
-  font-size: medium;
+  font-size: small;
   background-image: linear-gradient(80deg, #822406, #F4511E 50%);
   cursor: pointer;
 
