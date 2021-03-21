@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import cart from './img/cart.png';
-import arrow from './img/arrow.png';
 import { Filtro } from './components/Filtro';
 import { products } from './products';
 import Popup from './components/Popup';
@@ -284,10 +283,10 @@ const Button = styled.button`
   }
 `;
 
+
 const Footer = styled.footer`
     background-image: linear-gradient(80deg, #822406, #F4511E 50%);
 `
-
 
 export default class App extends React.Component {
   state = {
@@ -462,7 +461,7 @@ export default class App extends React.Component {
               {
                 <Total>
                   Total: R${this.renderTotal()}{' '}
-                  <FinalizarCompra src={arrow}>
+                  <FinalizarCompra >
                     Finalizar Compra
                   </FinalizarCompra>
                 </Total>
@@ -482,19 +481,6 @@ export default class App extends React.Component {
         <div>
           <ContainerPrincipal>{this.mostrarProdutos()}</ContainerPrincipal>
         </div>
-        <Footer>
-          <div>
-            <a href="https://www.instagram.com/" target="_blank">
-              <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.facebook.com/" target="_blank">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://twitter.com/login?lang=pt" target="_blank">
-              <i class="fab fa-twitter"></i>
-            </a>
-          </div>
-        </Footer>
       </div>
     );
   }
