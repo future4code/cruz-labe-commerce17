@@ -3,49 +3,99 @@ import styled from 'styled-components';
 import cart from './img/cart.png';
 import { Filtro } from './components/Filtro';
 import { products } from './products';
-import OrganizaSelect from './components/Select';
 import Popup from './components/Popup';
+import "./styles/pagina.css"
 
 const ContainerPrincipal = styled.div`
-  box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  min-height: 100vh;
+  grid-template-columns: repeat(5, 1fr);
+  /* min-height: 100vh; */
   row-gap: 10px;
-  text-align: center;
-  margin: 10px;
+  margin-left: 20px;
+
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    margin: 0;
+}
+
+  @media only screen and (max-width: 350px) {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: 1fr 1fr;
+    margin: 0;
+    padding: 0;
+}
 `;
 
 const ImgSatelites = styled.img`
   width: 100%;
   height: 50%;
   border-radius: 10px 10px 0 0;
+
+  @media only screen and (max-width: 375px) {
+    width: 100%;
+    height: 45%;
+}
 `;
 
 const Cart = styled.img`
   height: 50px;
   cursor: pointer;
+  background-color: rgba(150, 163, 184, 0.4);
+  color: white;
+  border-radius: 50%;
+  opacity: 1;
+  padding: 10px;
+
+  @media only screen and (max-width: 375px) {
+    position: relative;
+    margin-right: 20px;
+    bottom: 20px;
+    height: 28px;
+  }
 `;
 
 const Header = styled.header`
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  height: 100px;
-  background-color: rgb(143, 183, 206);
-  border-radius: 0 30px 0 30px;
-  color: black;
+  justify-content: space-evenly;
+  height: 8em;
+  font-size: x-large;
+  color: #FFFFFF;
+  width: 97%;
+  margin: auto;
+
+  @media only screen and (max-width: 375px) {
+    position: relative;
+    margin-right: 15px;
+    height: 6.7em;
+  }
 `;
 
-const Footer = styled.footer`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80px;
-  grid-column: 1 /-1;
-  background-color: rgb(143, 183, 206);
-  color: rgb(14, 39, 68);
-  font-size: 20px;
+const FraseHeader = styled.p`
+  align-self: flex-end;
+  justify-self: flex-start;
+  color: #FFFFFF;
+  text-align: center;
+  position: relative;
+  right: 400px;
+  font-size: x-large;
+
+  @media only screen and (max-width: 375px) {
+    font-size: medium;
+    right: 20px;
+  }
+`;
+
+const TituloHeader = styled.h1`
+    text-shadow: 2px 2px 5px darkgrey;
+
+    @media only screen and (max-width: 375px) {
+    font-size: 1.8em;
+    right: 20px;
+    margin-left: 20px;
+  }
 `;
 
 const CardsProdutos = styled.div`
@@ -54,30 +104,76 @@ const CardsProdutos = styled.div`
   margin-top: 10px;
   box-shadow: 2px 2px 5px darkgrey;
   border-radius: 10px;
-  background-color: lightgray;
-  margin: 10px 20px;
+  background-color: rgba(150, 163, 184, 0.4);
+  margin: 10px 27px;
   color: rgb(95, 19, 39);
-  width: 20vw;
-  height: 50vh;
+  width: 15vw;
+  height: 60vh;
+
+  @media only screen and (max-width: 375px) {
+    margin: 0;
+    height: 49vh;
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 97%;
+    margin: auto;
+  }
+`;
+
+const InformacoesCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  color: white;
+  margin: 15px;
 `;
 
 const CardsTitulos = styled.h2`
-  font-size: medium;
+  color: #FFFFFF;
+  margin: 0;
+  text-shadow: 2px 2px 5px darkgrey;
+
+`;
+
+const Preco = styled.p`
+  font-size: large;
 `;
 
 const Button = styled.button`
-  border-radius: 15px;
-  width: 60%;
+  border-radius: 30px;
+  width: 65%;
+  padding: 8px;
+  border: none;
+  background-color: #F55F20;
+  color: #FFFFFF;
+  font-size: small;
+  background-image: linear-gradient(80deg, #822406, #F4511E 50%);
   cursor: pointer;
+
+  @media only screen and (max-width: 375px) {
+    width: 70%;
+    font-size: small;
+  }
 `;
+
+const Footer = styled.footer`
+    background-image: linear-gradient(80deg, #822406, #F4511E 50%);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    color: #FFFFFF;
+    justify-content: center;
+    padding: 30px 30px 30px 30px;
+`
 
 export default class App extends React.Component {
   state = {
-    minimoValue: '5000',
-    maximoValue: '1000000',
+    minimoValue: '',
+    maximoValue: '',
     produtoValue: '',
     cartItems: [],
-    ordenacao: ''
+    ordenacao: '',
   };
 
   // componentDidMount() {
@@ -85,7 +181,7 @@ export default class App extends React.Component {
   //   const carrinhoEmObjeto = JSON.parse(carrinhoEmString)
   //   this.setState({novoCarrinho: carrinhoEmObjeto.cartItems})
   //   console.log("Montei")
-  // }
+  // };
 
   // componentDidUpdate() {
   //   console.log("Atualizei")
@@ -131,7 +227,7 @@ export default class App extends React.Component {
   };
 
   onChangeMinimoValue = (event) => {
-    this.setState({ minimoValue: event.target.value });
+    this.setState({minimoValue: event.target.value });
   };
   onChangeMaximoValue = (event) => {
     this.setState({ maximoValue: event.target.value });
@@ -139,42 +235,49 @@ export default class App extends React.Component {
   onChangeProdutoValue = (event) => {
     this.setState({ produtoValue: event.target.value });
   };
-  listaFiltro = () => {
-    return this.filtraProdutos().map((product) => {
+
+  mostrarProdutos = () => {
+    return this.filtrarEOrdenarProdutos().map((product) => {
       return (
         <CardsProdutos key={product.id}>
           <ImgSatelites src={product.icone} />
-          <CardsTitulos>{product.nome}</CardsTitulos>
-          <p>R${product.preco}</p>
-          <Button onClick={() => this.adicionarItemCarrinho(product)}>
-            Adicionar ao carrinho
-          </Button>
+          <InformacoesCard>
+            <CardsTitulos>{product.nome}</CardsTitulos>
+            <Preco>R${product.preco}</Preco>
+            <Button onClick={() => this.adicionarItemCarrinho(product)}>Adicionar ao carrinho</Button>
+          </InformacoesCard>
         </CardsProdutos>
       );
     });
   };
-  filtraProdutos = () => {
-    let produtosFiltrados = [...products];
-    produtosFiltrados = produtosFiltrados.filter((produto) => {
-      if (produto.preco <= this.state.minimoValue) {
-        return false;
-      }
-      return true;
-    });
-    produtosFiltrados = produtosFiltrados.filter((produto) => {
-      if (produto.preco >= this.state.maximoValue) {
-        return false;
-      }
 
-      return true;
-    });
+  filtrarEOrdenarProdutos = () => {
+    let produtosFiltrados = products;
+      produtosFiltrados = produtosFiltrados.filter((produto) => {
+        // SE O PREÇO DO PRODUTO FOR MENOR DO QUE O DIGITADO PELO USUÁRIO
+        // NÃO MOSTRA! (FALSE)
+        if (produto.preco < this.state.minimoValue) {
+          return false;
+        }
+          return true;
+
+      });
+      produtosFiltrados = produtosFiltrados.filter((produto) => {
+        // SE O PREÇO DO PRODUTO FOR MAIOR QUE O DIGITADO PELO USUÁRIO
+        // E SE O CAMPO DO INPUT FOR "TRUE", OU SEJA, SE HOUVER ALGO DIGITADO
+        // NÃO MOSTRA! (FALSE)
+        // MAS! SE O CAMPO DO INPUT FOR "FALSE", ENTÃO MOSTRA!
+        if ((produto.preco > this.state.maximoValue) && (this.state.maximoValue)) {
+          return false;
+        }
+          return true
+      })
 
     produtosFiltrados = produtosFiltrados.filter((produto) => {
-      if (produto.nome === this.state.produtoValue) {
-        return false;
-      }
-      return true;
-    });
+      let produtoMinusculo = produto.nome.toLowerCase()
+      let inputBusca = this.state.produtoValue.toLowerCase()
+      return produtoMinusculo.includes(inputBusca)
+    })
 
     switch (this.state.ordenacao) {
       case 'crescente':
@@ -184,10 +287,10 @@ export default class App extends React.Component {
         produtosFiltrados.sort((a, b) => b.preco - a.preco);
         return produtosFiltrados;
       default:
-    }
+    };
 
-    return produtosFiltrados;
-  };
+    return produtosFiltrados
+   };
 
   renderTotal = () => {
     let total = this.state.cartItems.reduce(getTotal, 0);
@@ -209,7 +312,7 @@ export default class App extends React.Component {
     return (
       <div>
         <Header>
-          <h1>Labe-Commerce</h1>
+          <TituloHeader>Cruz Sky Treasures</TituloHeader>
           <Cart src={cart} onClick={this.toggleModal}></Cart>
           <Popup trigger={this.state.buttonPopup}>
             <button onClick={this.toggleModal}>X</button>
@@ -226,7 +329,7 @@ export default class App extends React.Component {
                   </li>
                 );
               })}
-              <h2>Total: {this.renderTotal()}</h2>
+              {/* <h2>Total: {this.renderTotal()}</h2> */}
             </ul>
           </Popup>
         </Header>
@@ -237,15 +340,22 @@ export default class App extends React.Component {
           onChangeMinimoValue={this.onChangeMinimoValue}
           onChangeMaximoValue={this.onChangeMaximoValue}
           onChangeProdutoValue={this.onChangeProdutoValue}
-          onChangeSelect={this.onChangeSelect}
+          onChangeSelect = {this.onChangeSelect}
         />
         <div>
-          <ContainerPrincipal>{this.listaFiltro()}</ContainerPrincipal>
-        </div>
+          <ContainerPrincipal>
+            {this.mostrarProdutos()}
+          </ContainerPrincipal>
+         </div>
         <Footer>
-          <p> &#10049; Labe-Commerce feito com &#10084; para você</p>
+            <div>
+                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/login?lang=pt" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
         </Footer>
       </div>
     );
-  }
-}
+  };
+};
+
