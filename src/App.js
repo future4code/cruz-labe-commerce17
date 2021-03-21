@@ -48,7 +48,8 @@ const Cart = styled.img`
   opacity: 1;
   position: absolute;
   padding: 10px;
-  right: 200px;
+  right: 42px;
+  bottom: 80px;
 
   @media only screen and (max-width: 375px) {
     position: absolute;
@@ -145,10 +146,14 @@ const BotaoF = styled.button`
   color: #ffffff;
   font-size: small;
   cursor: pointer;
+  padding: 5px;
 `;
 
 const BotaoFCarrinho = styled.button`
   border-radius: 30px;
+  padding: 3px;
+  position: absolute;
+  right: 16px;
   border: none;
   background-image: linear-gradient(80deg, #822406, #f4511e 50%);
   background-color: #f55f20;
@@ -172,19 +177,6 @@ const FinalizarCompra = styled.button`
   color: white;
 `;
 
-const BotaoF = styled.button`
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  border-radius: 30px;
-  border: none;
-  background-image: linear-gradient(80deg, #822406, #f4511e 50%);
-  background-color: #f55f20;
-  color: #ffffff;
-  font-size: small;
-  cursor: pointer;
-`;
-
 const CarrinhoH2 = styled.h2`
   position: absolute;
   top: 16px;
@@ -203,14 +195,14 @@ const CarrinhoText = styled.p`
   font-size: medium;
   position: absolute;
   right: 100px;
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 395px) {
     display: none;
   }
 `;
 
 const UlStyled = styled.ul`
   position: absolute;
-  width: 350px;
+  width: 300px;
   margin: 100px auto 0;
   padding: 10px;
   box-sizing: border-box;
@@ -229,34 +221,22 @@ const LiStyled = styled.li`
   text-shadow: 2px 2px 5px darkgrey;
 `;
 
-const BotaoFCarrinho = styled.button`
-  border-radius: 30px;
-  border: none;
-  background-image: linear-gradient(80deg, #822406, #f4511e 50%);
-  background-color: #f55f20;
-  color: #ffffff;
-  font-size: small;
-  cursor: pointer;
-  position: absolute;
-  right: 16px;
-  margin-top: 10px;
-`;
-
 const Itens = styled.p`
   font-size: 15px;
   position: absolute;
   right:100px;
-  top:90px;
-  @media only screen and (max-width: 375px) {
-    margin-top: 100px;
+  top: 108px;
+  @media only screen and (max-width: 395px) {
     position: absolute;
-    right: 8px;
-    margin-top: -30px;
+    right: 30px;
+    margin-top: -21px;
   }
 `;
 
 const Total = styled.p`
   text-shadow: 2px 2px 5px darkgrey;
+  margin-left: 25px;
+
   @media only screen and (max-width: 375px) {
     margin-bottom: 50px;
   }
