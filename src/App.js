@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import cart from './img/cart.png';
 import { Filtro } from './components/Filtro';
 import { products } from './products';
-import OrganizaSelect from './components/Select';
 import Popup from './components/Popup';
 
 const ContainerPrincipal = styled.div`
@@ -65,6 +64,29 @@ const CardsTitulos = styled.h2`
   font-size: medium;
 `;
 
+const BotaoF = styled.button`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border-radius: 30px;
+  border: none;
+  background-image: linear-gradient(80deg, #822406, #f4511e 50%);
+  background-color: #f55f20;
+  color: #ffffff;
+  font-size: small;
+  cursor: pointer;
+`;
+
+const BotaoFCarrinho = styled.button`
+  border-radius: 30px;
+  border: none;
+  background-image: linear-gradient(80deg, #822406, #f4511e 50%);
+  background-color: #f55f20;
+  color: #ffffff;
+  font-size: small;
+  cursor: pointer;
+`;
+
 const Button = styled.button`
   border-radius: 15px;
   width: 60%;
@@ -110,7 +132,7 @@ export default class App extends React.Component {
     localStorage.setItem('novoCarrinho', JSON.stringify(novoCarrinho));
 
     this.renderTotal();
-    alert("Produto adicionado ao carrinho!");
+    alert('Produto adicionado ao carrinho!');
   };
 
   removerItemCarrinho = (product) => {
@@ -212,17 +234,19 @@ export default class App extends React.Component {
           <h1>Labe-Commerce</h1>
           <Cart src={cart} onClick={this.toggleModal}></Cart>
           <Popup trigger={this.state.buttonPopup}>
-            <button onClick={this.toggleModal}>X</button>
-            <h2>carrinho</h2>
+            <BotaoF onClick={this.toggleModal}>X</BotaoF>
+            <h2>Carrinho</h2>
             <ul>
               {this.state.cartItems.map((product) => {
                 return (
                   <li>
                     x{product.quantidade} - {product.product.nome} R$
                     {product.product.preco * product.quantidade} -{' '}
-                    <button onClick={() => this.removerItemCarrinho(product)}>
+                    <BotaoFCarrinho
+                      onClick={() => this.removerItemCarrinho(product)}
+                    >
                       x
-                    </button>
+                    </BotaoFCarrinho>
                   </li>
                 );
               })}
