@@ -14,18 +14,15 @@ const FilterContainer = styled.div `
     margin: 0 auto;
     padding: 5px;
 
-    @media only screen and (max-width: 375px) {
-        height: 22vh;
-        display: flex;
+    @media only screen and (max-width: 395px) {
+        height: 28vh;
         flex-direction: column;
         margin-bottom: 10px;
+        padding: 0;
+        border-radius: 40px 85px;
     }
 
     @media only screen and (max-width: 768px) {
-        width: 97%;
-        margin: auto;
-        margin-top: 10px;
-        margin-bottom: 10px;
     }
 `;
 
@@ -33,50 +30,52 @@ const DivBuscaNome = styled.div`
     width: 8em;
     text-align: center;
 
-    @media only screen and (max-width: 375px) {
+    @media only screen and (max-width: 395px) {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
-        margin-right: 20px;
+        margin-right: 32px; 
+        width: 300px;
     }
-`
+`;
+
 const DivOrdene = styled.div`
     width: 8em;
     text-align: center;
 
-    @media only screen and (max-width: 375px) {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 3px 0 0 42px;
+    @media only screen and (max-width: 395px) {
+        margin-left: 45px;
+        width: 15em;
     }
-`
+`;
+
 const DivInputs = styled.div`
     width: 8em;
     text-align: center;
 
-    @media only screen and (max-width: 375px) {
+    @media only screen and (max-width: 395px) {
+        width: 15em;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-`
+`;
 
 const InputContainer = styled.label `
     font-weight: bold;
     font-size: 1.2vw;
 
-    @media only screen and (max-width: 375px) {
-        font-size: small;
-        width: 240px;
+    @media only screen and (max-width: 395px) {
+        font-size: large;
+        width: 300px;
     }
 `;
 
 const Select = styled.select`
-    height: fit-content;
-    margin-left: 5px;
-    padding: 5px;
+    width: 8em;
+    margin-left: 10px;
+    padding: 4px;
     border-radius: 10px;
     border: none;
     background-color: white;

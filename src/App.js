@@ -9,9 +9,15 @@ import "./styles/pagina.css"
 const ContainerPrincipal = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  /* min-height: 100vh; */
   row-gap: 10px;
   margin-left: 20px;
+
+  @media only screen and (max-width: 395px) {
+    grid-template-columns: 1fr 1fr;
+    margin: 0;
+    padding: 0;
+    row-gap: 3px;
+}
 
   @media only screen and (max-width: 768px) {
     grid-template-columns: 1fr 1fr;
@@ -19,13 +25,7 @@ const ContainerPrincipal = styled.div`
     margin: 0;
 }
 
-  @media only screen and (max-width: 350px) {
-    display: flex;
-    flex-direction: column;
-    grid-template-columns: 1fr 1fr;
-    margin: 0;
-    padding: 0;
-}
+
 `;
 
 const ImgSatelites = styled.img`
@@ -35,7 +35,7 @@ const ImgSatelites = styled.img`
 
   @media only screen and (max-width: 375px) {
     width: 100%;
-    height: 45%;
+    height: 48%;
 }
 `;
 
@@ -48,11 +48,10 @@ const Cart = styled.img`
   opacity: 1;
   padding: 10px;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 395px) {
     position: relative;
     margin-right: 20px;
     bottom: 20px;
-    height: 28px;
   }
 `;
 
@@ -66,35 +65,19 @@ const Header = styled.header`
   width: 97%;
   margin: auto;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 395px) {
     position: relative;
-    margin-right: 15px;
+    margin-right: 8px;
     height: 6.7em;
-  }
-`;
-
-const FraseHeader = styled.p`
-  align-self: flex-end;
-  justify-self: flex-start;
-  color: #FFFFFF;
-  text-align: center;
-  position: relative;
-  right: 400px;
-  font-size: x-large;
-
-  @media only screen and (max-width: 375px) {
-    font-size: medium;
-    right: 20px;
   }
 `;
 
 const TituloHeader = styled.h1`
     text-shadow: 2px 2px 5px darkgrey;
 
-    @media only screen and (max-width: 375px) {
+    @media only screen and (max-width: 395px) {
     font-size: 1.8em;
-    right: 20px;
-    margin-left: 20px;
+    margin-left: 30px;
   }
 `;
 
@@ -105,19 +88,20 @@ const CardsProdutos = styled.div`
   box-shadow: 2px 2px 5px darkgrey;
   border-radius: 10px;
   background-color: rgba(150, 163, 184, 0.4);
-  margin: 10px 27px;
+  margin: 10px 15px;
   color: rgb(95, 19, 39);
-  width: 15vw;
-  height: 60vh;
+  width: 16vw;
+  height: 38vh;
 
-  @media only screen and (max-width: 375px) {
-    margin: 0;
-    height: 49vh;
+  @media only screen and (max-width: 1400px) {
+    height: 58vh;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 395px) {
     width: 97%;
-    margin: auto;
+    margin: 0 auto;
+    margin-top: 8px;
+    height: 48vh;
   }
 `;
 
@@ -127,7 +111,7 @@ const InformacoesCard = styled.div`
   align-content: center;
   align-items: center;
   color: white;
-  margin: 15px;
+  margin-top: 15px;
 `;
 
 const CardsTitulos = styled.h2`
@@ -139,12 +123,14 @@ const CardsTitulos = styled.h2`
 
 const Preco = styled.p`
   font-size: large;
+  margin-top: 15px;
+  margin-bottom: 15px;
 `;
 
 const Button = styled.button`
   border-radius: 30px;
-  width: 65%;
-  padding: 8px;
+  width: 40%;
+  padding: 10px;
   border: none;
   background-color: #F55F20;
   color: #FFFFFF;
@@ -152,7 +138,12 @@ const Button = styled.button`
   background-image: linear-gradient(80deg, #822406, #F4511E 50%);
   cursor: pointer;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 1400px) {
+    width: 65%;
+    font-size: small;
+  }
+
+  @media only screen and (max-width: 395px) {
     width: 70%;
     font-size: small;
   }
@@ -160,11 +151,6 @@ const Button = styled.button`
 
 const Footer = styled.footer`
     background-image: linear-gradient(80deg, #822406, #F4511E 50%);
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    color: #FFFFFF;
-    justify-content: center;
-    padding: 30px 30px 30px 30px;
 `
 
 export default class App extends React.Component {

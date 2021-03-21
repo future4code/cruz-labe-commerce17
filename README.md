@@ -12,19 +12,19 @@ Para colecionar ou presentear, acesse a nossa loja virtual e encontre satélites
 - [x] Cards com os produtos aparecendo na tela;
 - [x] Nome, preço e imagem aparecendo em cada card;
 - [x] Botão nos produtos para adicionar ao carrinho;
-- [ ] Ordenação de produtos em ordem crescente e decrescente;
+- [X] Ordenação de produtos em ordem crescente e decrescente;
 
 - Carrinho
 - [X] Mostra todos os produtos e quantidades adicionadas;
-- [ ] É possível remover itens do carrinho;
-- [ ] Mostra o valor total do carrinho;
+- [X] É possível remover itens do carrinho;
+- [X] Mostra o valor total do carrinho;
 
 - Filtro
 - [X] Campos de input do filtro funcionando para números e texto;
-- [ ] Filtrando por valor mínimo e máximo;
-- [ ] Filtrando por nome do produto.
+- [X] Filtrando por valor mínimo e máximo;
+- [X] Filtrando por nome do produto.
 
-- [ ] Responsivo para desktop, <strong>iPhone 6/7/8</strong> e <strong>iPhoneX</strong>;
+- [X] Responsivo para desktop, <strong>iPhone 6/7/8</strong> e <strong>iPhoneX</strong>;
 
 ## 🛠 Tecnologia
 
