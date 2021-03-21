@@ -108,7 +108,7 @@ const CardsProdutos = styled.div`
   margin: 10px 27px;
   color: rgb(95, 19, 39);
   width: 15vw;
-  height: 44vh;
+  height: 50vh;
 
   @media only screen and (max-width: 375px) {
     margin: 0;
@@ -143,7 +143,7 @@ const Preco = styled.p`
 
 const Button = styled.button`
   border-radius: 30px;
-  width: 55%;
+  width: 65%;
   padding: 8px;
   border: none;
   background-color: #F55F20;
