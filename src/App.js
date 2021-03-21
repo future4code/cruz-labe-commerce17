@@ -9,19 +9,20 @@ import './styles/pagina.css';
 const ContainerPrincipal = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  /* min-height: 100vh; */
   row-gap: 10px;
   margin-left: 20px;
-
-  @media only screen and (max-width: 395px) {
-    grid-template-columns: 1fr 1fr;
-    margin: 0;
-    padding: 0;
-    row-gap: 3px;
-}
 
   @media only screen and (max-width: 768px) {
     grid-template-columns: 1fr 1fr;
     width: 100%;
+    margin: 0;
+  }
+
+  @media only screen and (max-width: 350px) {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: 1fr 1fr;
     margin: 0;
     padding: 0;
   }
@@ -34,8 +35,8 @@ const ImgSatelites = styled.img`
 
   @media only screen and (max-width: 375px) {
     width: 100%;
-    height: 48%;
-}
+    height: 45%;
+  }
 `;
 
 const Cart = styled.img`
@@ -55,7 +56,7 @@ const Cart = styled.img`
     height: 28px;
     right: 16px;
     margin-top: 10px;
-
+  }
 `;
 
 const Header = styled.header`
@@ -68,9 +69,9 @@ const Header = styled.header`
   width: 97%;
   margin: auto;
 
-  @media only screen and (max-width: 395px) {
+  @media only screen and (max-width: 375px) {
     position: relative;
-    margin-right: 8px;
+    margin-right: 15px;
     height: 6.7em;
   }
 `;
@@ -78,7 +79,6 @@ const Header = styled.header`
 const TituloHeader = styled.h1`
   text-shadow: 2px 2px 5px darkgrey;
   position: absolute;
-
 
   @media only screen and (max-width: 375px) {
     position: absolute;
@@ -95,20 +95,19 @@ const CardsProdutos = styled.div`
   box-shadow: 2px 2px 5px darkgrey;
   border-radius: 10px;
   background-color: rgba(150, 163, 184, 0.4);
-  margin: 10px 15px;
+  margin: 10px 27px;
   color: rgb(95, 19, 39);
-  width: 16vw;
-  height: 38vh;
+  width: 15vw;
+  height: 60vh;
 
-  @media only screen and (max-width: 1400px) {
-    height: 58vh;
+  @media only screen and (max-width: 375px) {
+    margin: 0;
+    height: 49vh;
   }
 
-  @media only screen and (max-width: 395px) {
+  @media only screen and (max-width: 768px) {
     width: 97%;
-    margin: 0 auto;
-    margin-top: 8px;
-    height: 48vh;
+    margin: auto;
   }
 `;
 
@@ -118,7 +117,7 @@ const InformacoesCard = styled.div`
   align-content: center;
   align-items: center;
   color: white;
-  margin-top: 15px;
+  margin: 15px;
 `;
 
 const CardsTitulos = styled.h2`
@@ -129,31 +128,6 @@ const CardsTitulos = styled.h2`
 
 const Preco = styled.p`
   font-size: large;
-  margin-top: 15px;
-  margin-bottom: 15px;
-`;
-
-const BotaoF = styled.button`
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  border-radius: 30px;
-  border: none;
-  background-image: linear-gradient(80deg, #822406, #f4511e 50%);
-  background-color: #f55f20;
-  color: #ffffff;
-  font-size: small;
-  cursor: pointer;
-`;
-
-const BotaoFCarrinho = styled.button`
-  border-radius: 30px;
-  border: none;
-  background-image: linear-gradient(80deg, #822406, #f4511e 50%);
-  background-color: #f55f20;
-  color: #ffffff;
-  font-size: small;
-  cursor: pointer;
 `;
 
 const FinalizarCompra = styled.button`
@@ -263,8 +237,8 @@ const Total = styled.p`
 
 const Button = styled.button`
   border-radius: 30px;
-  width: 40%;
-  padding: 10px;
+  width: 65%;
+  padding: 8px;
   border: none;
   background-color: #f55f20;
   color: #ffffff;
@@ -272,21 +246,11 @@ const Button = styled.button`
   background-image: linear-gradient(80deg, #822406, #f4511e 50%);
   cursor: pointer;
 
-  @media only screen and (max-width: 1400px) {
-    width: 65%;
-    font-size: small;
-  }
-
-  @media only screen and (max-width: 395px) {
+  @media only screen and (max-width: 375px) {
     width: 70%;
     font-size: small;
   }
 `;
-
-
-const Footer = styled.footer`
-    background-image: linear-gradient(80deg, #822406, #F4511E 50%);
-`
 
 export default class App extends React.Component {
   state = {
@@ -455,7 +419,6 @@ export default class App extends React.Component {
                       x
                     </BotaoFCarrinho>
                   </LiStyled>
-
                 );
               })}
               {
