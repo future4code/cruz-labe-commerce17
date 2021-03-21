@@ -1,10 +1,19 @@
-# Oldies from the Sky Store
+# Cruz Sky Treasures
+
+Bem vindo à Cruz Sky Treasures, a sua melhor loja de satélites! :)
 
 Já pensou em colecionar alguma coisa ou está procurando um presente para um amigo que está cansado de mais do mesmo?
 E se essa coisa fosse um satélite antigo?
 Se você está aqui, então hoje é o seu dia de sorte!
 
 Para colecionar ou presentear, acesse a nossa loja virtual e encontre satélites de todos os tipos, chineses, russos, americanos e muito mais!
+
+Visite a nossa loja em: https://labecommerce.surge.sh/
+
+### Nossa loja
+![sky1000](https://user-images.githubusercontent.com/63327969/111925040-f293fb80-8a85-11eb-91e7-09dd2b433c3a.png)
+![sky999](https://user-images.githubusercontent.com/63327969/111925044-f58eec00-8a85-11eb-901f-0134619d0ffc.png)
+
 
 ### Features
 
@@ -29,6 +38,7 @@ Para colecionar ou presentear, acesse a nossa loja virtual e encontre satélites
 ## 🛠 Tecnologia
 
   <a href="https://pt-br.reactjs.org/">🔗 React</a>
+
 - Library para desenvolvimento de interfaces do usuário utilizando componentes reutilizáveis.
 
 ## 🚀 Autoras e Autor
