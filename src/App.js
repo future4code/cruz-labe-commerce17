@@ -183,9 +183,9 @@ export default class App extends React.Component {
   //   console.log("Montei")
   // };
 
-  componentDidUpdate() {
-    console.log("Atualizei")
-  };
+  // componentDidUpdate() {
+  //   console.log("Atualizei")
+  // };
 
   adicionarItemCarrinho = (product) => {
     const novoCarrinho = [...this.state.cartItems];
@@ -203,11 +203,10 @@ export default class App extends React.Component {
       cartItems: novoCarrinho
     });
 
-    localStorage.setItem('novoCarrinho', JSON.stringify(novoCarrinho))
+    localStorage.setItem('novoCarrinho', JSON.stringify(novoCarrinho));
 
     this.renderTotal();
-    console.log(novoCarrinho.lenght)
-
+    alert("Produto adicionado ao carrinho!");
   };
 
   removerItemCarrinho = (product) => {
@@ -251,6 +250,7 @@ export default class App extends React.Component {
       );
     });
   };
+
   filtrarEOrdenarProdutos = () => {
     let produtosFiltrados = products;
       produtosFiltrados = produtosFiltrados.filter((produto) => {
@@ -281,16 +281,16 @@ export default class App extends React.Component {
 
     switch (this.state.ordenacao) {
       case 'crescente':
-        produtosFiltrados.sort((a, b) => a.preco - b.preco)
+        produtosFiltrados.sort((a, b) => a.preco - b.preco);
         return produtosFiltrados;
       case 'decrescente':
-        produtosFiltrados.sort((a, b) => b.preco - a.preco)
+        produtosFiltrados.sort((a, b) => b.preco - a.preco);
         return produtosFiltrados;
       default:
     };
 
     return produtosFiltrados
-  };
+   };
 
   renderTotal = () => {
     let total = this.state.cartItems.reduce(getTotal, 0);
@@ -305,8 +305,7 @@ export default class App extends React.Component {
   };
 
   toggleModal = () => {
-    const buttonPopup= true
-    this.setState({ buttonPopup, setButtonPopup: true });
+    this.setState({ ...this.state, buttonPopup: !this.state.buttonPopup });
   };
 
   render() {
@@ -316,13 +315,14 @@ export default class App extends React.Component {
           <TituloHeader>Cruz Sky Treasures</TituloHeader>
           <Cart src={cart} onClick={this.toggleModal}></Cart>
           <Popup trigger={this.state.buttonPopup}>
-            {/* <h2>carrinho</h2> */}
+            <button onClick={this.toggleModal}>X</button>
+            <h2>carrinho</h2>
             <ul>
               {this.state.cartItems.map((product) => {
                 return (
                   <li>
-                    x{product.quantidade} - {product.product.nome}
-                    R${product.product.preco * product.quantidade} -{' '}
+                    x{product.quantidade} - {product.product.nome} R$
+                    {product.product.preco * product.quantidade} -{' '}
                     <button onClick={() => this.removerItemCarrinho(product)}>
                       x
                     </button>
@@ -346,24 +346,7 @@ export default class App extends React.Component {
           <ContainerPrincipal>
             {this.mostrarProdutos()}
           </ContainerPrincipal>
-          <div>
-            {/* <h2>carrinho</h2> */}
-            <ul>
-              {this.state.cartItems.map((product) => {
-                return (
-                  <li>
-                    x{product.quantidade} - {product.product.nome}
-                    R${product.product.preco * product.quantidade} -{' '}
-                    <button onClick={() => this.removerItemCarrinho(product)}>
-                    x
-                    </button>
-                  </li>
-                );
-              })}
-              {/* <h2>Total: {this.renderTotal()}</h2> */}
-            </ul>
-          </div>
-        </div>
+         </div>
         <Footer>
             <div>
                 <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -375,3 +358,4 @@ export default class App extends React.Component {
     );
   };
 };
+
