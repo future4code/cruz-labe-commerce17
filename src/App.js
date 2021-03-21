@@ -4,16 +4,14 @@ import cart from './img/cart.png';
 import { Filtro } from './components/Filtro';
 import { products } from './products';
 import Popup from './components/Popup';
-import "./styles/animacao.css"
+import "./styles/pagina.css"
 
 const ContainerPrincipal = styled.div`
-  box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  min-height: 100vh;
+  /* min-height: 100vh; */
   row-gap: 10px;
-  text-align: center;
-  margin: 10px;
+  margin-left: 20px;
 
   @media only screen and (max-width: 768px) {
     grid-template-columns: 1fr 1fr;
@@ -26,6 +24,7 @@ const ContainerPrincipal = styled.div`
     flex-direction: column;
     grid-template-columns: 1fr 1fr;
     margin: 0;
+    padding: 0;
 }
 `;
 
@@ -36,7 +35,7 @@ const ImgSatelites = styled.img`
 
   @media only screen and (max-width: 375px) {
     width: 100%;
-
+    height: 45%;
 }
 `;
 
@@ -49,36 +48,54 @@ const Cart = styled.img`
   opacity: 1;
   padding: 10px;
 
-  @media only screen and (max-width: 768px) {
-    width: 8%;
-    height: 40%;
+  @media only screen and (max-width: 375px) {
+    position: relative;
+    margin-right: 20px;
+    bottom: 20px;
+    height: 28px;
   }
 `;
 
 const Header = styled.header`
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  height: 100px;
+  justify-content: space-evenly;
+  height: 8em;
   font-size: x-large;
-  /* background-color: rgba(150, 163, 184, 0.4); */
-  border-radius: 20px 70px 30px;
   color: #FFFFFF;
+  width: 97%;
+  margin: auto;
+
+  @media only screen and (max-width: 375px) {
+    position: relative;
+    margin-right: 15px;
+    height: 6.7em;
+  }
+`;
+
+const FraseHeader = styled.p`
+  align-self: flex-end;
+  justify-self: flex-start;
+  color: #FFFFFF;
+  text-align: center;
+  position: relative;
+  right: 400px;
+  font-size: x-large;
+
+  @media only screen and (max-width: 375px) {
+    font-size: medium;
+    right: 20px;
+  }
 `;
 
 const TituloHeader = styled.h1`
     text-shadow: 2px 2px 5px darkgrey;
-`
 
-const Footer = styled.footer`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80px;
-  grid-column: 1 /-1;
-  background-color: rgb(143, 183, 206);
-  color: rgb(14, 39, 68);
-  font-size: 20px;
+    @media only screen and (max-width: 375px) {
+    font-size: 1.8em;
+    right: 20px;
+    margin-left: 20px;
+  }
 `;
 
 const CardsProdutos = styled.div`
@@ -88,14 +105,14 @@ const CardsProdutos = styled.div`
   box-shadow: 2px 2px 5px darkgrey;
   border-radius: 10px;
   background-color: rgba(150, 163, 184, 0.4);
-  margin: 10px 20px;
+  margin: 10px 27px;
   color: rgb(95, 19, 39);
   width: 15vw;
-  height: 40vh;
+  height: 44vh;
 
   @media only screen and (max-width: 375px) {
     margin: 0;
-    height: 47vh;
+    height: 49vh;
   }
 
   @media only screen and (max-width: 768px) {
@@ -111,7 +128,7 @@ const InformacoesCard = styled.div`
   align-items: center;
   color: white;
   margin: 15px;
-`
+`;
 
 const CardsTitulos = styled.h2`
   color: #FFFFFF;
@@ -122,13 +139,33 @@ const CardsTitulos = styled.h2`
 
 const Preco = styled.p`
   font-size: large;
-`
+`;
 
 const Button = styled.button`
-  border-radius: 15px;
-  width: 60%;
+  border-radius: 30px;
+  width: 55%;
+  padding: 8px;
+  border: none;
+  background-color: #F55F20;
+  color: #FFFFFF;
+  font-size: medium;
+  background-image: linear-gradient(80deg, #822406, #F4511E 50%);
   cursor: pointer;
+
+  @media only screen and (max-width: 375px) {
+    width: 70%;
+    font-size: small;
+  }
 `;
+
+const Footer = styled.footer`
+    background-image: linear-gradient(80deg, #822406, #F4511E 50%);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    color: #FFFFFF;
+    justify-content: center;
+    padding: 30px 30px 30px 30px;
+`
 
 export default class App extends React.Component {
   state = {
@@ -144,11 +181,11 @@ export default class App extends React.Component {
   //   const carrinhoEmObjeto = JSON.parse(carrinhoEmString)
   //   this.setState({novoCarrinho: carrinhoEmObjeto.cartItems})
   //   console.log("Montei")
-  // }
-
-  // componentDidUpdate() {
-  //   console.log("Atualizei")
   // };
+
+  componentDidUpdate() {
+    console.log("Atualizei")
+  };
 
   adicionarItemCarrinho = (product) => {
     const novoCarrinho = [...this.state.cartItems];
@@ -236,8 +273,6 @@ export default class App extends React.Component {
           return true
       })
 
-
-
     produtosFiltrados = produtosFiltrados.filter((produto) => {
       let produtoMinusculo = produto.nome.toLowerCase()
       let inputBusca = this.state.produtoValue.toLowerCase()
@@ -255,7 +290,7 @@ export default class App extends React.Component {
     };
 
     return produtosFiltrados
-  }
+  };
 
   renderTotal = () => {
     let total = this.state.cartItems.reduce(getTotal, 0);
@@ -272,16 +307,16 @@ export default class App extends React.Component {
   toggleModal = () => {
     const buttonPopup= true
     this.setState({ buttonPopup, setButtonPopup: true });
-  }
+  };
 
   render() {
     return (
-      <div class="animacao">
+      <div>
         <Header>
-          <TituloHeader>Oldies from the Sky</TituloHeader>
+          <TituloHeader>Cruz Sky Treasures</TituloHeader>
           <Cart src={cart} onClick={this.toggleModal}></Cart>
           <Popup trigger={this.state.buttonPopup}>
-            <h2>carrinho</h2>
+            {/* <h2>carrinho</h2> */}
             <ul>
               {this.state.cartItems.map((product) => {
                 return (
@@ -294,7 +329,7 @@ export default class App extends React.Component {
                   </li>
                 );
               })}
-              <h2>Total: {this.renderTotal()}</h2>
+              {/* <h2>Total: {this.renderTotal()}</h2> */}
             </ul>
           </Popup>
         </Header>
@@ -309,15 +344,10 @@ export default class App extends React.Component {
         />
         <div>
           <ContainerPrincipal>
-
             {this.mostrarProdutos()}
-            {/* <div class="animacao"> */}
-              <div class="stars"></div>
-            {/* </div> */}
-
           </ContainerPrincipal>
           <div>
-            <h2>carrinho</h2>
+            {/* <h2>carrinho</h2> */}
             <ul>
               {this.state.cartItems.map((product) => {
                 return (
@@ -330,14 +360,18 @@ export default class App extends React.Component {
                   </li>
                 );
               })}
-              <h2>Total: {this.renderTotal()}</h2>
+              {/* <h2>Total: {this.renderTotal()}</h2> */}
             </ul>
           </div>
         </div>
         <Footer>
-          <p> &#10049; Labe-Commerce feito com &#10084; para você</p>
+            <div>
+                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/login?lang=pt" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
         </Footer>
       </div>
-    )
-  }
-}
+    );
+  };
+};
