@@ -79,10 +79,8 @@ const TituloHeader = styled.h1`
   position: absolute;
 
   @media only screen and (max-width: 375px) {
-    position: absolute;
     font-size: 1.8em;
-    right: 20px;
-    margin-left: 50px;
+    margin-left: 20px;
   }
 `;
 
