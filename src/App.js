@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import cart from './img/cart.png';
-import arrow from './img/arrow.png';
 import { Filtro } from './components/Filtro';
 import { products } from './products';
 import Popup from './components/Popup';
@@ -449,7 +448,7 @@ export default class App extends React.Component {
               {
                 <Total>
                   Total: R${this.renderTotal()}{' '}
-                  <FinalizarCompra src={arrow}>
+                  <FinalizarCompra >
                     Finalizar Compra
                   </FinalizarCompra>
                 </Total>
