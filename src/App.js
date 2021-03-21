@@ -4,7 +4,7 @@ import cart from './img/cart.png';
 import { Filtro } from './components/Filtro';
 import { products } from './products';
 import Popup from './components/Popup';
-import "./styles/pagina.css"
+import './styles/pagina.css';
 
 const ContainerPrincipal = styled.div`
   display: grid;
@@ -17,7 +17,7 @@ const ContainerPrincipal = styled.div`
     grid-template-columns: 1fr 1fr;
     width: 100%;
     margin: 0;
-}
+  }
 
   @media only screen and (max-width: 350px) {
     display: flex;
@@ -25,7 +25,7 @@ const ContainerPrincipal = styled.div`
     grid-template-columns: 1fr 1fr;
     margin: 0;
     padding: 0;
-}
+  }
 `;
 
 const ImgSatelites = styled.img`
@@ -36,7 +36,7 @@ const ImgSatelites = styled.img`
   @media only screen and (max-width: 375px) {
     width: 100%;
     height: 45%;
-}
+  }
 `;
 
 const Cart = styled.img`
@@ -47,6 +47,7 @@ const Cart = styled.img`
   border-radius: 50%;
   opacity: 1;
   padding: 10px;
+  ;
 
   @media only screen and (max-width: 375px) {
     position: relative;
@@ -62,7 +63,7 @@ const Header = styled.header`
   justify-content: space-evenly;
   height: 8em;
   font-size: x-large;
-  color: #FFFFFF;
+  color: #ffffff;
   width: 97%;
   margin: auto;
 
@@ -76,7 +77,7 @@ const Header = styled.header`
 const FraseHeader = styled.p`
   align-self: flex-end;
   justify-self: flex-start;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
   position: relative;
   right: 400px;
@@ -89,9 +90,9 @@ const FraseHeader = styled.p`
 `;
 
 const TituloHeader = styled.h1`
-    text-shadow: 2px 2px 5px darkgrey;
+  text-shadow: 2px 2px 5px darkgrey;
 
-    @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 375px) {
     font-size: 1.8em;
     right: 20px;
     margin-left: 20px;
@@ -131,10 +132,9 @@ const InformacoesCard = styled.div`
 `;
 
 const CardsTitulos = styled.h2`
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0;
   text-shadow: 2px 2px 5px darkgrey;
-
 `;
 
 const Preco = styled.p`
@@ -146,10 +146,10 @@ const Button = styled.button`
   width: 65%;
   padding: 8px;
   border: none;
-  background-color: #F55F20;
-  color: #FFFFFF;
+  background-color: #f55f20;
+  color: #ffffff;
   font-size: small;
-  background-image: linear-gradient(80deg, #822406, #F4511E 50%);
+  background-image: linear-gradient(80deg, #822406, #f4511e 50%);
   cursor: pointer;
 
   @media only screen and (max-width: 375px) {
@@ -159,13 +159,13 @@ const Button = styled.button`
 `;
 
 const Footer = styled.footer`
-    background-image: linear-gradient(80deg, #822406, #F4511E 50%);
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    color: #FFFFFF;
-    justify-content: center;
-    padding: 30px 30px 30px 30px;
-`
+  background-image: linear-gradient(80deg, #822406, #f4511e 50%);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  color: #ffffff;
+  justify-content: center;
+  padding: 30px 30px 30px 30px;
+`;
 
 export default class App extends React.Component {
   state = {
@@ -173,7 +173,7 @@ export default class App extends React.Component {
     maximoValue: '',
     produtoValue: '',
     cartItems: [],
-    ordenacao: '',
+    ordenacao: ''
   };
 
   // componentDidMount() {
@@ -206,7 +206,7 @@ export default class App extends React.Component {
     localStorage.setItem('novoCarrinho', JSON.stringify(novoCarrinho));
 
     this.renderTotal();
-    alert("Produto adicionado ao carrinho!");
+    alert('Produto adicionado ao carrinho!');
   };
 
   removerItemCarrinho = (product) => {
@@ -227,7 +227,7 @@ export default class App extends React.Component {
   };
 
   onChangeMinimoValue = (event) => {
-    this.setState({minimoValue: event.target.value });
+    this.setState({ minimoValue: event.target.value });
   };
   onChangeMaximoValue = (event) => {
     this.setState({ maximoValue: event.target.value });
@@ -244,7 +244,9 @@ export default class App extends React.Component {
           <InformacoesCard>
             <CardsTitulos>{product.nome}</CardsTitulos>
             <Preco>R${product.preco}</Preco>
-            <Button onClick={() => this.adicionarItemCarrinho(product)}>Adicionar ao carrinho</Button>
+            <Button onClick={() => this.adicionarItemCarrinho(product)}>
+              Adicionar ao carrinho
+            </Button>
           </InformacoesCard>
         </CardsProdutos>
       );
@@ -253,31 +255,30 @@ export default class App extends React.Component {
 
   filtrarEOrdenarProdutos = () => {
     let produtosFiltrados = products;
-      produtosFiltrados = produtosFiltrados.filter((produto) => {
-        // SE O PREÇO DO PRODUTO FOR MENOR DO QUE O DIGITADO PELO USUÁRIO
-        // NÃO MOSTRA! (FALSE)
-        if (produto.preco < this.state.minimoValue) {
-          return false;
-        }
-          return true;
-
-      });
-      produtosFiltrados = produtosFiltrados.filter((produto) => {
-        // SE O PREÇO DO PRODUTO FOR MAIOR QUE O DIGITADO PELO USUÁRIO
-        // E SE O CAMPO DO INPUT FOR "TRUE", OU SEJA, SE HOUVER ALGO DIGITADO
-        // NÃO MOSTRA! (FALSE)
-        // MAS! SE O CAMPO DO INPUT FOR "FALSE", ENTÃO MOSTRA!
-        if ((produto.preco > this.state.maximoValue) && (this.state.maximoValue)) {
-          return false;
-        }
-          return true
-      })
+    produtosFiltrados = produtosFiltrados.filter((produto) => {
+      // SE O PREÇO DO PRODUTO FOR MENOR DO QUE O DIGITADO PELO USUÁRIO
+      // NÃO MOSTRA! (FALSE)
+      if (produto.preco < this.state.minimoValue) {
+        return false;
+      }
+      return true;
+    });
+    produtosFiltrados = produtosFiltrados.filter((produto) => {
+      // SE O PREÇO DO PRODUTO FOR MAIOR QUE O DIGITADO PELO USUÁRIO
+      // E SE O CAMPO DO INPUT FOR "TRUE", OU SEJA, SE HOUVER ALGO DIGITADO
+      // NÃO MOSTRA! (FALSE)
+      // MAS! SE O CAMPO DO INPUT FOR "FALSE", ENTÃO MOSTRA!
+      if (produto.preco > this.state.maximoValue && this.state.maximoValue) {
+        return false;
+      }
+      return true;
+    });
 
     produtosFiltrados = produtosFiltrados.filter((produto) => {
-      let produtoMinusculo = produto.nome.toLowerCase()
-      let inputBusca = this.state.produtoValue.toLowerCase()
-      return produtoMinusculo.includes(inputBusca)
-    })
+      let produtoMinusculo = produto.nome.toLowerCase();
+      let inputBusca = this.state.produtoValue.toLowerCase();
+      return produtoMinusculo.includes(inputBusca);
+    });
 
     switch (this.state.ordenacao) {
       case 'crescente':
@@ -287,10 +288,10 @@ export default class App extends React.Component {
         produtosFiltrados.sort((a, b) => b.preco - a.preco);
         return produtosFiltrados;
       default:
-    };
+    }
 
-    return produtosFiltrados
-   };
+    return produtosFiltrados;
+  };
 
   renderTotal = () => {
     let total = this.state.cartItems.reduce(getTotal, 0);
@@ -340,22 +341,25 @@ export default class App extends React.Component {
           onChangeMinimoValue={this.onChangeMinimoValue}
           onChangeMaximoValue={this.onChangeMaximoValue}
           onChangeProdutoValue={this.onChangeProdutoValue}
-          onChangeSelect = {this.onChangeSelect}
+          onChangeSelect={this.onChangeSelect}
         />
         <div>
-          <ContainerPrincipal>
-            {this.mostrarProdutos()}
-          </ContainerPrincipal>
-         </div>
+          <ContainerPrincipal>{this.mostrarProdutos()}</ContainerPrincipal>
+        </div>
         <Footer>
-            <div>
-                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://twitter.com/login?lang=pt" target="_blank"><i class="fab fa-twitter"></i></a>
-            </div>
+          <div>
+            <a href="https://www.instagram.com/" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/" target="_blank">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/login?lang=pt" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
         </Footer>
       </div>
     );
-  };
-};
-
+  }
+}
