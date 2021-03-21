@@ -76,21 +76,6 @@ const Header = styled.header`
   }
 `;
 
-const FraseHeader = styled.p`
-  align-self: flex-end;
-  justify-self: flex-start;
-  color: #ffffff;
-  text-align: center;
-  position: relative;
-  right: 400px;
-  font-size: x-large;
-
-  @media only screen and (max-width: 375px) {
-    font-size: medium;
-    right: 20px;
-  }
-`;
-
 const TituloHeader = styled.h1`
   text-shadow: 2px 2px 5px darkgrey;
   position: absolute;
@@ -265,15 +250,6 @@ const Button = styled.button`
     width: 70%;
     font-size: small;
   }
-`;
-
-const Footer = styled.footer`
-  background-image: linear-gradient(80deg, #822406, #f4511e 50%);
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  color: #ffffff;
-  justify-content: center;
-  padding: 30px 30px 30px 30px;
 `;
 
 export default class App extends React.Component {
@@ -468,19 +444,6 @@ export default class App extends React.Component {
         <div>
           <ContainerPrincipal>{this.mostrarProdutos()}</ContainerPrincipal>
         </div>
-        <Footer>
-          <div>
-            <a href="https://www.instagram.com/" target="_blank">
-              <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.facebook.com/" target="_blank">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://twitter.com/login?lang=pt" target="_blank">
-              <i class="fab fa-twitter"></i>
-            </a>
-          </div>
-        </Footer>
       </div>
     );
   }
