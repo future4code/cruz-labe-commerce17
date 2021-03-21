@@ -110,7 +110,7 @@ export default class App extends React.Component {
     localStorage.setItem('novoCarrinho', JSON.stringify(novoCarrinho));
 
     this.renderTotal();
-    console.log(novoCarrinho.lenght);
+    alert("Produto adicionado ao carrinho!");
   };
 
   removerItemCarrinho = (product) => {
