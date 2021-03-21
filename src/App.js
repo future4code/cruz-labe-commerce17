@@ -43,21 +43,18 @@ const Cart = styled.img`
   height: 50px;
   cursor: pointer;
   background-color: rgba(150, 163, 184, 0.4);
-  color: white;
+  color: black;
   border-radius: 50%;
   opacity: 1;
   position: absolute;
   padding: 10px;
-  right: 42px;
-  bottom: 80px;
+  right: 40px;
+  top: 78px;
 
-  @media only screen and (max-width: 375px) {
-    position: absolute;
-    bottom: 28px;
-    height: 28px;
-    right: 16px;
-    margin-top: 10px;
-
+  @media only screen and (max-width: 395px) {
+    top: 35px;
+    right: 42px;
+  }
 `;
 
 const Header = styled.header`
